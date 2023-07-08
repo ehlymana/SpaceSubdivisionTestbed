@@ -8,14 +8,22 @@ namespace CogoTestBed
 {
     public class Edge
     {
+        #region Properties
+
         public Node NodeA { get; set; }
 
         public Node NodeB { get; set; }
+
+        #endregion
+
+        #region Constructor
 
         public Edge()
         {
             NodeA = new Node();
             NodeB = new Node();
         }
+
+        #endregion
     }
 }

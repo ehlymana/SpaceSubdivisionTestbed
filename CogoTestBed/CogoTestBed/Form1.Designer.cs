@@ -43,6 +43,10 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonDraw = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonSubdivide = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -158,7 +162,7 @@
             // 
             // buttonLoop
             // 
-            this.buttonLoop.Location = new System.Drawing.Point(170, 88);
+            this.buttonLoop.Location = new System.Drawing.Point(181, 85);
             this.buttonLoop.Name = "buttonLoop";
             this.buttonLoop.Size = new System.Drawing.Size(75, 23);
             this.buttonLoop.TabIndex = 4;
@@ -206,6 +210,10 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.comboBox2);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.comboBox1);
+            this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.richTextBox1);
             this.groupBox3.Controls.Add(this.buttonSubdivide);
             this.groupBox3.Location = new System.Drawing.Point(32, 396);
@@ -215,18 +223,59 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Subdivision";
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(130, 34);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(219, 23);
+            this.comboBox2.TabIndex = 5;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 37);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 15);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Element to divide:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Rectangular",
+            "Axis-aligned",
+            "Convex",
+            "Irregular"});
+            this.comboBox1.Location = new System.Drawing.Point(130, 66);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(219, 23);
+            this.comboBox1.TabIndex = 3;
+            this.comboBox1.Text = "Rectangular";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Output shape type:";
+            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 83);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 127);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(333, 135);
+            this.richTextBox1.Size = new System.Drawing.Size(333, 91);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "Output messages:";
             // 
             // buttonSubdivide
             // 
-            this.buttonSubdivide.Location = new System.Drawing.Point(104, 47);
+            this.buttonSubdivide.Location = new System.Drawing.Point(104, 98);
             this.buttonSubdivide.Name = "buttonSubdivide";
             this.buttonSubdivide.Size = new System.Drawing.Size(152, 23);
             this.buttonSubdivide.TabIndex = 0;
@@ -253,6 +302,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -276,5 +326,9 @@
         private Label labelY;
         private Label labelX;
         private Button buttonLoop;
+        private ComboBox comboBox1;
+        private Label label3;
+        private ComboBox comboBox2;
+        private Label label4;
     }
 }

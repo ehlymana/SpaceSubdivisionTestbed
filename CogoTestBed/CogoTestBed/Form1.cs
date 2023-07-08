@@ -12,20 +12,23 @@ namespace CogoTestBed
 
         List<HierarchyElement> shapes = new List<HierarchyElement>();
 
-        HierarchyElement temporaryElement = new HierarchyElement();
-        Edge temporaryEdge = new Edge();
+        HierarchyElement temporaryElement;
+        Edge temporaryEdge;
 
         List<Point> mouseLine = new List<Point>();
 
         #endregion
 
-        #region Methods
+        #region Constructor
 
         public Form1()
         {
             InitializeComponent();
-            
         }
+
+        #endregion
+
+        #region Methods
 
         #region Drawing (graphical)
 
@@ -54,11 +57,17 @@ namespace CogoTestBed
         /// <param name="e"></param>
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            if (!drawing)
+                return;
+
             drawing = false;
 
             // at least three edges were added to create a shape
             if (temporaryElement.Edges.Count > 2)
                 shapes.Add(temporaryElement);
+
+            temporaryElement = null;
+            temporaryEdge = null;
 
             // delete temporary and unfinished edges
             mouseLine.Clear();
@@ -83,13 +92,21 @@ namespace CogoTestBed
             mouseLine.Clear();
 
             // delete all shapes which were drawn
-            panel1.Refresh();
+            Refresh();
 
             // refresh information about the coordinates
             labelX.Text = "X:";
             labelY.Text = "Y:";
+
+            temporaryElement = null;
+            temporaryEdge = null;
         }
 
+        /// <summary>
+        /// Handle mouse click on the panel - draw a new line (edge)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel1_Click(object sender, EventArgs e)
         {
             // drawing mode not active - ignore click
@@ -137,6 +154,11 @@ namespace CogoTestBed
             Refresh();
         }
 
+        /// <summary>
+        /// Show information about the current coordinates of the panel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (drawing && mouseLine.Count > 0)
@@ -156,27 +178,60 @@ namespace CogoTestBed
             }
         }
 
+        /// <summary>
+        /// Draw lines on the panel to show the desired shapes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            Pen pen = new Pen(Color.Black, 1);
+            comboBox2.Items.Clear();
+            comboBox2.SelectedIndex = -1;
+            comboBox2.Text = "";
+            comboBox2.BackColor = Color.White;
+
             // draw all hierarchy elements
-            foreach (HierarchyElement shape in shapes)
+
+            Pen pen;
+            for (int i = 0; i < shapes.Count; i++)
             {
+                pen = new Pen(shapes[i].Color, 2);
+                // add shape to combo box for enabling subdivision
+                comboBox2.Items.Add(shapes[i].ID + ", color: " + shapes[i].Color.ToKnownColor().ToString());
+                if (i == 0)
+                {
+                    comboBox2.SelectedIndex = 0;
+                    comboBox2.BackColor = shapes[i].Color;
+                }
+
                 // draw all edges of the element
-                foreach (Edge edge in shape.Edges)
+                foreach (Edge edge in shapes[i].Edges)
                     e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
             }
 
-            // draw unfinished lines
+            // draw unfinished edges
+            pen = new Pen(Color.Black, 2);
             if (mouseLine.Count > 1)
                 e.Graphics.DrawLine(pen, mouseLine[0], mouseLine[1]);
 
-            foreach (Edge edge in temporaryElement.Edges)
-                e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
+            // draw finished edges
+            if (temporaryElement != null)
+            {
+                foreach (Edge edge in temporaryElement.Edges)
+                    e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
+            }
         }
 
+        /// <summary>
+        /// Finish shape automatically by adding a line connecting the first edge with the last created
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonLoop_Click(object sender, EventArgs e)
         {
+            if (temporaryElement.Edges.Count < 3)
+                return;
+
             // put starting point of the shape as the end point of the current edge
             Node endPoint = temporaryElement.Edges[0].NodeA;
             temporaryEdge.NodeB = endPoint;
@@ -192,13 +247,28 @@ namespace CogoTestBed
 
         #region Drawing (manual)
 
+        /// <summary>
+        /// Manually insert new edge by using coordinates specified by the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonInsert_Click(object sender, EventArgs e)
         {
+            if (!drawing)
+                return;
+
+            if (temporaryElement == null)
+            {
+                temporaryElement = new HierarchyElement();
+                temporaryEdge = new Edge();
+            }
+
             Node node = new Node()
             {
                 X = (int)numericUpDown1.Value,
                 Y = (int)numericUpDown2.Value
             };
+
             // this is the first node - add it to the first edge
             if (temporaryEdge.NodeA.X == 0 && temporaryEdge.NodeA.Y == 0)
             {
@@ -227,17 +297,56 @@ namespace CogoTestBed
             Refresh();
         }
 
+        /// <summary>
+        /// Change the color of combo box to make selection of the desired shape easier
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedIndex != -1)
+                comboBox2.BackColor = shapes[comboBox2.SelectedIndex].Color;
+            else
+            {
+                comboBox2.Text = "";
+                comboBox2.BackColor = Color.White;
+            }
+        }
+
         #endregion
 
         #region Subdivision
 
+        /// <summary>
+        /// Begin subdivision of the desired shape automatically
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSubdivide_Click(object sender, EventArgs e)
         {
+            // if no item is selected, do nothing
+            if (comboBox2.SelectedItem == null)
+                return;
+
+            // determine which shape is selected
+            string item = comboBox2.SelectedItem.ToString().Split(",")[0];
+            HierarchyElement shape = shapes.Find(x => x.ID == Int32.Parse(item));
+
+            if (shape == null)
+                return;
+
+            // determine the shape of the element
+            shape.DetermineShapeType();
+
+            richTextBox1.Text = "Input shape type: " + shape.ShapeType.ToString() + "\n";
+
 
         }
 
         #endregion
 
         #endregion
+
+        
     }
 }

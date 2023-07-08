@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace CogoTestBed
 {
-    public class Node
+    public enum ShapeType
     {
-        #region Properties
-
-        public int X { get; set; }
-
-        public int Y { get; set; }
-
-        #endregion
+        Rectangular, AxisAligned, Convex, Irregular
     }
 }
