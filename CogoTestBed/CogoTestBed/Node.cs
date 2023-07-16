@@ -15,5 +15,14 @@ namespace CogoTestBed
         public int Y { get; set; }
 
         #endregion
+
+        #region Constructor
+
+        public Node()
+        {
+
+        }
+
+        #endregion
     }
 }
