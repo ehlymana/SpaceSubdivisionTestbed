@@ -108,6 +108,7 @@ namespace CogoTestBed
             temporaryEdge = null;
 
             toolStripStatusLabel1.Text = "Reset finished!";
+            richTextBox1.Text = "";
         }
 
         /// <summary>
@@ -218,9 +219,9 @@ namespace CogoTestBed
                 // draw all edges and nodes of the element
                 foreach (Edge edge in shapes[i].Edges)
                 {
-                    e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
-                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle(edge.NodeA.X, edge.NodeA.Y, 2, 2));
-                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle(edge.NodeB.X, edge.NodeB.Y, 2, 2));
+                    e.Graphics.DrawLine(pen, new Point(x: (int)edge.NodeA.X, y: (int)edge.NodeA.Y), new Point(x: (int)edge.NodeB.X, y: (int)edge.NodeB.Y));
+                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle((int)edge.NodeA.X, (int)edge.NodeA.Y, 2, 2));
+                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle((int)edge.NodeB.X, (int)edge.NodeB.Y, 2, 2));
                 }
             }
 
@@ -233,7 +234,7 @@ namespace CogoTestBed
             if (temporaryElement != null)
             {
                 foreach (Edge edge in temporaryElement.Edges)
-                    e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
+                    e.Graphics.DrawLine(pen, new Point(x: (int)edge.NodeA.X, y: (int)edge.NodeA.Y), new Point(x: (int)edge.NodeB.X, y: (int)edge.NodeB.Y));
             }
 
             toolStripStatusLabel1.Text = "";
@@ -298,7 +299,7 @@ namespace CogoTestBed
                 temporaryEdge.NodeA = node;
 
                 // add information for drawing the line on the panel
-                mouseLine.Add(new Point(node.X, node.Y));
+                mouseLine.Add(new Point((int)node.X, (int)node.Y));
             }
 
             else
@@ -313,7 +314,7 @@ namespace CogoTestBed
 
                 // reset the information for drawing the line on the panel
                 mouseLine.Clear();
-                mouseLine.Add(new Point(node.X, node.Y));
+                mouseLine.Add(new Point((int)node.X, (int)node.Y));
             }
 
             // redraw all shapes
@@ -363,7 +364,19 @@ namespace CogoTestBed
 
             richTextBox1.Text = "Input shape type: " + shape.ShapeType.ToString() + "\n";
 
+            List<HierarchyElement> newShapes = shape.Subdivide();
 
+            richTextBox1.Text += "Subdivision complete! Total new shapes: " + newShapes.Count + "\n";
+
+            // remove the old shape from hierarchy elements
+            shapes.Remove(shape);
+
+            // add new shapes to hierarchy elements
+            foreach (HierarchyElement newShape in newShapes)
+                shapes.Add(newShape);
+
+            // refresh the panel
+            Refresh();
         }
 
         #endregion
