@@ -199,6 +199,9 @@ namespace CogoTestBed
                 }
             }
             // create new set of polygons by using DFS
+            List<HierarchyElement> newElements = new List<HierarchyElement>();
+
+            return newElements;
         }
 
         /// <summary>
@@ -258,7 +261,7 @@ namespace CogoTestBed
 
             boundingBox.Edges.Add(new Edge()
             {
-                NodeA = new Node() { X = lowerLeft.X, Y = lowerLeft.Y }
+                NodeA = new Node() { X = lowerLeft.X, Y = lowerLeft.Y },
                 NodeB = new Node() { X = lowerLeft.X, Y = upperRight.Y }
             });
 
@@ -267,7 +270,7 @@ namespace CogoTestBed
 
         public List<Tuple<Edge, Node>> FindEdgesThatIntersect(Edge edge)
         {
-            List<Tuple<Edge, Node>> intersectEdges = new List<Edge>();
+            List<Tuple<Edge, Node>> intersectEdges = new List<Tuple<Edge, Node>>();
 
             // parameters of the line to which the intersection edge belongs
             int k1 = int.MaxValue;
@@ -281,7 +284,7 @@ namespace CogoTestBed
                 // parameters of the line to which the current edge belongs
                 int k2 = int.MaxValue;
                 if (shapeEdge.NodeB.X - shapeEdge.NodeA.X != 0)
-                    k2 = (shapeEdge.NodeB.Y - shapeEdge.NodeA.Y) / (shapeEdge.NodeB.X - shapeEdge.NodeA.X),
+                    k2 = (shapeEdge.NodeB.Y - shapeEdge.NodeA.Y) / (shapeEdge.NodeB.X - shapeEdge.NodeA.X);
                 int n2 = shapeEdge.NodeA.Y - k2 * shapeEdge.NodeA.X;
 
                 // lines are parallel and do not intersect

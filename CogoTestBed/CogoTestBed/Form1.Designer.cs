@@ -28,283 +28,306 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonReset = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonInsert = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonLoop = new System.Windows.Forms.Button();
-            this.labelY = new System.Windows.Forms.Label();
-            this.labelX = new System.Windows.Forms.Label();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonDraw = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.buttonSubdivide = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.SuspendLayout();
+            panel1 = new Panel();
+            buttonReset = new Button();
+            groupBox1 = new GroupBox();
+            buttonInsert = new Button();
+            numericUpDown2 = new NumericUpDown();
+            numericUpDown1 = new NumericUpDown();
+            label2 = new Label();
+            label1 = new Label();
+            groupBox2 = new GroupBox();
+            buttonLoop = new Button();
+            labelY = new Label();
+            labelX = new Label();
+            buttonStop = new Button();
+            buttonDraw = new Button();
+            groupBox3 = new GroupBox();
+            comboBox2 = new ComboBox();
+            label4 = new Label();
+            comboBox1 = new ComboBox();
+            label3 = new Label();
+            richTextBox1 = new RichTextBox();
+            buttonSubdivide = new Button();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            comboBox3 = new ComboBox();
+            panel1.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.buttonReset);
-            this.panel1.Location = new System.Drawing.Point(420, 29);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(877, 603);
-            this.panel1.TabIndex = 0;
-            this.panel1.Click += new System.EventHandler(this.panel1_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            panel1.BackColor = Color.White;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(buttonReset);
+            panel1.Location = new Point(416, 41);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(877, 591);
+            panel1.TabIndex = 0;
+            panel1.Click += panel1_Click;
+            panel1.Paint += panel1_Paint;
+            panel1.MouseMove += panel1_MouseMove;
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(772, 561);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(75, 23);
-            this.buttonReset.TabIndex = 0;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = true;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            buttonReset.Location = new Point(797, 563);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(75, 23);
+            buttonReset.TabIndex = 0;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonInsert);
-            this.groupBox1.Controls.Add(this.numericUpDown2);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(32, 209);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 169);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Manual insertion";
+            groupBox1.Controls.Add(buttonInsert);
+            groupBox1.Controls.Add(numericUpDown2);
+            groupBox1.Controls.Add(numericUpDown1);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Location = new Point(32, 209);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(367, 169);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Manual insertion";
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(136, 117);
-            this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(75, 23);
-            this.buttonInsert.TabIndex = 4;
-            this.buttonInsert.Text = "Insert";
-            this.buttonInsert.UseVisualStyleBackColor = true;
-            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            buttonInsert.Location = new Point(136, 117);
+            buttonInsert.Name = "buttonInsert";
+            buttonInsert.Size = new Size(75, 23);
+            buttonInsert.TabIndex = 4;
+            buttonInsert.Text = "Insert";
+            buttonInsert.UseVisualStyleBackColor = true;
+            buttonInsert.Click += buttonInsert_Click;
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(136, 63);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            999999999,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(120, 23);
-            this.numericUpDown2.TabIndex = 3;
+            numericUpDown2.Location = new Point(136, 63);
+            numericUpDown2.Maximum = new decimal(new int[] { 999999999, 0, 0, 0 });
+            numericUpDown2.Name = "numericUpDown2";
+            numericUpDown2.Size = new Size(120, 23);
+            numericUpDown2.TabIndex = 3;
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(136, 33);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 23);
-            this.numericUpDown1.TabIndex = 2;
+            numericUpDown1.Location = new Point(136, 33);
+            numericUpDown1.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(120, 23);
+            numericUpDown1.TabIndex = 2;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Y coordinate:";
+            label2.AutoSize = true;
+            label2.Location = new Point(28, 65);
+            label2.Name = "label2";
+            label2.Size = new Size(77, 15);
+            label2.TabIndex = 1;
+            label2.Text = "Y coordinate:";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "X coordinate:";
+            label1.AutoSize = true;
+            label1.Location = new Point(28, 35);
+            label1.Name = "label1";
+            label1.Size = new Size(77, 15);
+            label1.TabIndex = 0;
+            label1.Text = "X coordinate:";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.buttonLoop);
-            this.groupBox2.Controls.Add(this.labelY);
-            this.groupBox2.Controls.Add(this.labelX);
-            this.groupBox2.Controls.Add(this.buttonStop);
-            this.groupBox2.Controls.Add(this.buttonDraw);
-            this.groupBox2.Location = new System.Drawing.Point(32, 32);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(367, 152);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Graphical drawing";
+            groupBox2.Controls.Add(buttonLoop);
+            groupBox2.Controls.Add(labelY);
+            groupBox2.Controls.Add(labelX);
+            groupBox2.Controls.Add(buttonStop);
+            groupBox2.Controls.Add(buttonDraw);
+            groupBox2.Location = new Point(32, 32);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(367, 152);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Graphical drawing";
             // 
             // buttonLoop
             // 
-            this.buttonLoop.Location = new System.Drawing.Point(181, 85);
-            this.buttonLoop.Name = "buttonLoop";
-            this.buttonLoop.Size = new System.Drawing.Size(75, 23);
-            this.buttonLoop.TabIndex = 4;
-            this.buttonLoop.Text = "Close loop";
-            this.buttonLoop.UseVisualStyleBackColor = true;
-            this.buttonLoop.Click += new System.EventHandler(this.buttonLoop_Click);
+            buttonLoop.Location = new Point(181, 85);
+            buttonLoop.Name = "buttonLoop";
+            buttonLoop.Size = new Size(75, 23);
+            buttonLoop.TabIndex = 4;
+            buttonLoop.Text = "Close loop";
+            buttonLoop.UseVisualStyleBackColor = true;
+            buttonLoop.Click += buttonLoop_Click;
             // 
             // labelY
             // 
-            this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(170, 59);
-            this.labelY.Name = "labelY";
-            this.labelY.Size = new System.Drawing.Size(17, 15);
-            this.labelY.TabIndex = 3;
-            this.labelY.Text = "Y:";
+            labelY.AutoSize = true;
+            labelY.Location = new Point(170, 59);
+            labelY.Name = "labelY";
+            labelY.Size = new Size(17, 15);
+            labelY.TabIndex = 3;
+            labelY.Text = "Y:";
             // 
             // labelX
             // 
-            this.labelX.AutoSize = true;
-            this.labelX.Location = new System.Drawing.Point(170, 34);
-            this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(17, 15);
-            this.labelX.TabIndex = 2;
-            this.labelX.Text = "X:";
+            labelX.AutoSize = true;
+            labelX.Location = new Point(170, 34);
+            labelX.Name = "labelX";
+            labelX.Size = new Size(17, 15);
+            labelX.TabIndex = 2;
+            labelX.Text = "X:";
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(28, 85);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(113, 23);
-            this.buttonStop.TabIndex = 1;
-            this.buttonStop.Text = "Finish drawing";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            buttonStop.Location = new Point(28, 85);
+            buttonStop.Name = "buttonStop";
+            buttonStop.Size = new Size(113, 23);
+            buttonStop.TabIndex = 1;
+            buttonStop.Text = "Finish drawing";
+            buttonStop.UseVisualStyleBackColor = true;
+            buttonStop.Click += buttonStop_Click;
             // 
             // buttonDraw
             // 
-            this.buttonDraw.Location = new System.Drawing.Point(28, 34);
-            this.buttonDraw.Name = "buttonDraw";
-            this.buttonDraw.Size = new System.Drawing.Size(113, 23);
-            this.buttonDraw.TabIndex = 0;
-            this.buttonDraw.Text = "Start drawing";
-            this.buttonDraw.UseVisualStyleBackColor = true;
-            this.buttonDraw.Click += new System.EventHandler(this.buttonDraw_Click);
+            buttonDraw.Location = new Point(28, 34);
+            buttonDraw.Name = "buttonDraw";
+            buttonDraw.Size = new Size(113, 23);
+            buttonDraw.TabIndex = 0;
+            buttonDraw.Text = "Start drawing";
+            buttonDraw.UseVisualStyleBackColor = true;
+            buttonDraw.Click += buttonDraw_Click;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.comboBox2);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.comboBox1);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.richTextBox1);
-            this.groupBox3.Controls.Add(this.buttonSubdivide);
-            this.groupBox3.Location = new System.Drawing.Point(32, 396);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(367, 236);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Subdivision";
+            groupBox3.Controls.Add(comboBox2);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(comboBox1);
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(richTextBox1);
+            groupBox3.Controls.Add(buttonSubdivide);
+            groupBox3.Location = new Point(32, 396);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(367, 236);
+            groupBox3.TabIndex = 3;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Subdivision";
             // 
             // comboBox2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(130, 34);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(219, 23);
-            this.comboBox2.TabIndex = 5;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(130, 34);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(219, 23);
+            comboBox2.TabIndex = 5;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 37);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 15);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Element to divide:";
+            label4.AutoSize = true;
+            label4.Location = new Point(16, 37);
+            label4.Name = "label4";
+            label4.Size = new Size(102, 15);
+            label4.TabIndex = 4;
+            label4.Text = "Element to divide:";
             // 
             // comboBox1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Rectangular",
-            "Axis-aligned",
-            "Convex",
-            "Irregular"});
-            this.comboBox1.Location = new System.Drawing.Point(130, 66);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(219, 23);
-            this.comboBox1.TabIndex = 3;
-            this.comboBox1.Text = "Rectangular";
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "Rectangular", "Axis-aligned", "Convex", "Irregular" });
+            comboBox1.Location = new Point(130, 66);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(219, 23);
+            comboBox1.TabIndex = 3;
+            comboBox1.Text = "Rectangular";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(108, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Output shape type:";
+            label3.AutoSize = true;
+            label3.Location = new Point(16, 69);
+            label3.Name = "label3";
+            label3.Size = new Size(108, 15);
+            label3.TabIndex = 2;
+            label3.Text = "Output shape type:";
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 127);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(333, 91);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "Output messages:";
+            richTextBox1.Location = new Point(16, 127);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new Size(333, 91);
+            richTextBox1.TabIndex = 1;
+            richTextBox1.Text = "Output messages:";
             // 
             // buttonSubdivide
             // 
-            this.buttonSubdivide.Location = new System.Drawing.Point(104, 98);
-            this.buttonSubdivide.Name = "buttonSubdivide";
-            this.buttonSubdivide.Size = new System.Drawing.Size(152, 23);
-            this.buttonSubdivide.TabIndex = 0;
-            this.buttonSubdivide.Text = "Begin subdivision";
-            this.buttonSubdivide.UseVisualStyleBackColor = true;
-            this.buttonSubdivide.Click += new System.EventHandler(this.buttonSubdivide_Click);
+            buttonSubdivide.Location = new Point(104, 98);
+            buttonSubdivide.Name = "buttonSubdivide";
+            buttonSubdivide.Size = new Size(152, 23);
+            buttonSubdivide.TabIndex = 0;
+            buttonSubdivide.Text = "Begin subdivision";
+            buttonSubdivide.UseVisualStyleBackColor = true;
+            buttonSubdivide.Click += buttonSubdivide_Click;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Location = new Point(0, 636);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1320, 22);
+            statusStrip1.TabIndex = 4;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            toolStripStatusLabel1.ForeColor = Color.Red;
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(118, 17);
+            toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "Import data", "Export data" });
+            comboBox3.Location = new Point(1164, 12);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(129, 23);
+            comboBox3.TabIndex = 1;
+            comboBox3.Text = "Import/export data";
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1320, 658);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel1);
-            this.Name = "Form1";
-            this.Text = "CogoTestBed";
-            this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1320, 658);
+            Controls.Add(comboBox3);
+            Controls.Add(statusStrip1);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
+            Controls.Add(panel1);
+            Name = "Form1";
+            Text = "CogoTestBed";
+            panel1.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -330,5 +353,8 @@
         private Label label3;
         private ComboBox comboBox2;
         private Label label4;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ComboBox comboBox3;
     }
 }

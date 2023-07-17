@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -24,6 +25,7 @@ namespace CogoTestBed
         public Form1()
         {
             InitializeComponent();
+            toolStripStatusLabel1.Text = "";
         }
 
         #endregion
@@ -48,6 +50,8 @@ namespace CogoTestBed
             // refresh information about the coordinates
             labelX.Text = "X:";
             labelY.Text = "Y:";
+
+            toolStripStatusLabel1.Text = "Initiated drawing!";
         }
 
         /// <summary>
@@ -78,6 +82,8 @@ namespace CogoTestBed
             // refresh information about the coordinates
             labelX.Text = "X:";
             labelY.Text = "Y:";
+
+            toolStripStatusLabel1.Text = "Finished drawing!";
         }
 
         /// <summary>
@@ -100,6 +106,8 @@ namespace CogoTestBed
 
             temporaryElement = null;
             temporaryEdge = null;
+
+            toolStripStatusLabel1.Text = "Reset finished!";
         }
 
         /// <summary>
@@ -111,15 +119,18 @@ namespace CogoTestBed
         {
             // drawing mode not active - ignore click
             if (!drawing)
+            {
+                toolStripStatusLabel1.Text = "Drawing needs to be initiated first!";
                 return;
+            }
 
             // drawing mode active - capture the coordinates of the clicked point
             Point point = panel1.PointToClient(Cursor.Position);
 
             Node node = new Node()
-            { 
+            {
                 X = point.X,
-                Y = point.Y 
+                Y = point.Y
             };
 
             // show information about the coordinates on the UI
@@ -204,9 +215,13 @@ namespace CogoTestBed
                     comboBox2.BackColor = shapes[i].Color;
                 }
 
-                // draw all edges of the element
+                // draw all edges and nodes of the element
                 foreach (Edge edge in shapes[i].Edges)
+                {
                     e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
+                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle(edge.NodeA.X, edge.NodeA.Y, 2, 2));
+                    e.Graphics.DrawEllipse(new Pen(Color.Black, 2), new Rectangle(edge.NodeB.X, edge.NodeB.Y, 2, 2));
+                }
             }
 
             // draw unfinished edges
@@ -220,6 +235,8 @@ namespace CogoTestBed
                 foreach (Edge edge in temporaryElement.Edges)
                     e.Graphics.DrawLine(pen, new Point(x: edge.NodeA.X, y: edge.NodeA.Y), new Point(x: edge.NodeB.X, y: edge.NodeB.Y));
             }
+
+            toolStripStatusLabel1.Text = "";
         }
 
         /// <summary>
@@ -229,8 +246,12 @@ namespace CogoTestBed
         /// <param name="e"></param>
         private void buttonLoop_Click(object sender, EventArgs e)
         {
-            if (temporaryElement.Edges.Count < 3)
+            // cannot create element with one edge + closed loop (total of 2 edges)
+            if (temporaryElement.Edges.Count < 2)
+            {
+                toolStripStatusLabel1.Text = "Element needs to have at least two edges!";
                 return;
+            }
 
             // put starting point of the shape as the end point of the current edge
             Node endPoint = temporaryElement.Edges[0].NodeA;
@@ -241,6 +262,8 @@ namespace CogoTestBed
 
             // finish drawing
             buttonStop_Click(sender, e);
+
+            toolStripStatusLabel1.Text = "Finished drawing automatically!";
         }
 
         #endregion
@@ -347,6 +370,88 @@ namespace CogoTestBed
 
         #endregion
 
-        
+        #region Import/Export data
+
+        /// <summary>
+        /// Perform data export or import based on selected combo box item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox3.SelectedIndex == -1)
+            {
+                comboBox3.Text = "Import/export data";
+                return;
+            }
+            else if (comboBox3.SelectedIndex == 0)
+                ImportData();
+            else
+                ExportData();
+
+            comboBox3.SelectedIndex = -1;
+            comboBox3.Text = "Import/export data";
+        }
+
+        /// <summary>
+        /// Import data from existing JSON file
+        /// </summary>
+        public void ImportData()
+        {
+            // open existing file
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Filter = "json files (*.json)|*.json";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            string import = "";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = Path.GetFullPath(openFileDialog1.FileName);
+                using (StreamReader reader = new StreamReader(path))
+                    import = reader.ReadToEnd();
+
+                // import data from file
+                shapes = JsonConvert.DeserializeObject<List<HierarchyElement>>(import);
+                Refresh();
+
+                toolStripStatusLabel1.Text = "Import successfully completed!";
+            }
+            
+            else
+                toolStripStatusLabel1.Text = "Import failed!";
+        }
+
+        /// <summary>
+        /// Export data to new JSON file
+        /// </summary>
+        public void ExportData()
+        {
+            // form the contents of the export
+            string export = JsonConvert.SerializeObject(shapes);
+
+            // save the data to a file
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "json files (*.json)|*.json";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string path = Path.GetFullPath(saveFileDialog1.FileName);
+                using (StreamWriter writer = new StreamWriter(path))
+                    writer.Write(export);
+
+                toolStripStatusLabel1.Text = "Export completed successfully!";
+            }
+
+            else
+                toolStripStatusLabel1.Text = "Export failed!";
+        }
+
+        #endregion
     }
 }
