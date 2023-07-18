@@ -132,7 +132,7 @@ namespace CogoTestBed
         /// Subdivide shape to multiple new shapes and return them as result
         /// </summary>
         /// <returns></returns>
-        public List<HierarchyElement> Subdivide()
+        public List<HierarchyElement>? Subdivide()
         {
             #region Cutting
 
@@ -215,6 +215,8 @@ namespace CogoTestBed
 
             #endregion
 
+            /*
+
             #region DFS
 
             // calculate the number of different points in the polygon
@@ -244,7 +246,124 @@ namespace CogoTestBed
 
             List<Tuple<List<Node>, double>> paths = new List<Tuple<List<Node>, double>>();
 
-            int counter = 0;
+            for (int i = 0; i < allNodes.Count; i++)
+            {
+                List<List<int>> pathsOfNode = new List<List<int>>();
+                pathsOfNode.Add(new List<int>() { i });
+                List<int> nodesToCheck = new List<int>() { i };
+                int majorCounter = allNodes.Count,
+                    minorCounter = 1,
+                    totalNeighbors = 0;
+                do
+                {
+                    int currentNode = nodesToCheck[0];
+                    List<int> neighbors = new List<int>();
+                    for (int j = 0; j < allNodes.Count; j++)
+                    {
+                        // do not consider same nodes
+                        if (currentNode == j)
+                            continue;
+
+                        // add new nodes to check
+                        else if (adjacencyMatrix[currentNode, j] == true)
+                            neighbors.Add(j);
+                    }
+
+                    List<List<int>> newPaths = new List<List<int>>();
+                    List<int> pathsDel = new List<int>();
+
+                    for (int k = 0; k < pathsOfNode.Count; k++)
+                    {
+                        // skip paths which end in the starting node - they are a cycle
+                        if (pathsOfNode[k].Count > 3 && pathsOfNode[k][0] == pathsOfNode[k][pathsOfNode[k].Count - 1])
+                            continue;
+
+                        // found a path that appends to the current node
+                        if (pathsOfNode[k][pathsOfNode[k].Count - 1] == currentNode)
+                        {
+                            // add new path for each neighbor
+                            foreach (int node in neighbors)
+                            {
+                                // do not add paths which go back to the same node, e.g. A-B-A
+                                if (pathsOfNode[k].Count > 1 && pathsOfNode[k][pathsOfNode[k].Count - 2] == node)
+                                    continue;
+
+                                // do not add paths which contain the same node again
+                                else if (node != i && pathsOfNode[k].GetRange(0, pathsOfNode[k].Count - 1).Contains(node))
+                                    continue;
+
+                                List<int> newPath = new List<int>();
+                                foreach (int n in pathsOfNode[k])
+                                    newPath.Add(n);
+                                newPath.Add(node);
+                                newPaths.Add(newPath);
+                            }
+                            pathsDel.Add(k);
+                        }
+                    }
+
+                    pathsDel.Sort();
+                    pathsDel.Reverse();
+
+                    foreach (int index in pathsDel)
+                        pathsOfNode.RemoveAt(index);
+                    foreach (List<int> newPath in newPaths)
+                        pathsOfNode.Add(newPath);
+
+                    nodesToCheck.RemoveAt(0);
+
+                    if (minorCounter == 1)
+                    {
+                        minorCounter = totalNeighbors + neighbors.Count;
+                        totalNeighbors = 0;
+                        majorCounter--;
+                    }
+                    else
+                    {
+                        minorCounter--;
+                        totalNeighbors += neighbors.Count;
+                    }
+
+                    foreach (int neighbor in neighbors)
+                        nodesToCheck.Add(neighbor);
+                }
+                while (nodesToCheck.Count > 0 && majorCounter > 0);
+
+                for (int j = 0; j < pathsOfNode.Count; j++)
+                {
+                    for (int k = j + 1; k < pathsOfNode.Count; k++)
+                    {
+                        if (Enumerable.SequenceEqual(pathsOfNode[j].OrderBy(e => e), pathsOfNode[k].OrderBy(e => e)))
+                        {
+                            pathsOfNode.RemoveAt(k);
+                            k--;
+                        }
+                    }
+                }
+
+                foreach (List<int> path in pathsOfNode)
+                {
+                    List<Node> singlePath = new List<Node>();
+                    double length = 0;
+
+                    // only consider cyclic paths
+                    if (path[0] != path[path.Count - 1])
+                        continue;
+
+                    // formulate path and length
+                    for (int j = 0; j < path.Count; j++)
+                    {
+                        if (j > 0)
+                            length += Math.Sqrt(Math.Pow(allNodes[path[j]].X - allNodes[path[j - 1]].X, 2) + Math.Pow(allNodes[path[j]].Y - allNodes[path[j - 1]].Y, 2));
+
+                        singlePath.Add(allNodes[path[j]]);
+                    }
+
+                    paths.Add(new Tuple<List<Node>, double>(singlePath, length));
+                }          
+            }
+
+            /*int counter = 0;
             while (counter < allNodes.Count * allNodes.Count)
             {
                 List<Node> path = new List<Node>();
@@ -341,15 +460,19 @@ namespace CogoTestBed
 
                     // add path for deleting if it is redundant
                     // delete the longer path
-                    if (numberOfNodes == 0 && paths[i].Item1.Count < paths[j].Item1.Count)
+                    if (numberOfNodes == 0 && paths[i].Item1.Count < paths[j].Item1.Count && !pathsToDelete.Contains(j))
                         pathsToDelete.Add(j);
-                    else if (numberOfNodes == 0)
+                    else if (numberOfNodes == 0 && !pathsToDelete.Contains(i))
                         pathsToDelete.Add(i);
                 }
             }
 
+            pathsToDelete.Sort();
+            pathsToDelete.Reverse();
+
             foreach (int index in pathsToDelete)
                 paths.RemoveAt(index);
+
 
             #endregion
 
@@ -378,6 +501,10 @@ namespace CogoTestBed
             return newElements;
 
             #endregion
+
+            */
+
+            return null;
         }
 
         /// <summary>
