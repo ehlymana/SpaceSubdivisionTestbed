@@ -38,7 +38,7 @@ namespace CogoTestBed
               "DarkCyan", "DarkGoldenrod", "DarkGreen", "DarkOliveGreen", "DarkOrange",
               "DarkOrchid", "DarkRed", "DarkSalmon", "DarkSlateBlue", "DarkSlateGray", "DarkTurquoise",
               "DarkViolet", "DeepPink", "DeepSkyBlue", "DimGray", "DodgerBlue", "Firebrick", "ForestGreen",
-              "Fuschia", "Gold", "Goldenrod", "Gray", "Green", "HotPink", "IndianRed", "Indigo", "LawnGreen",
+              "Gold", "Goldenrod", "Gray", "Green", "HotPink", "IndianRed", "Indigo", "LawnGreen",
               "LightCoral", "LightGreen", "LightPink", "LightSalmon", "LightSeaGreen", "LightSkyBlue",
               "LightSlateGray", "LightSteelBlue", "Lime", "LimeGreen", "Magenta", "Maroon", "MediumAquamarine",
               "MediumBlue", "MediumOrchid", "MediumPurple", "MediumSeaGreen", "MediumSlateBlue", "MediumSpringGreen",
@@ -152,15 +152,15 @@ namespace CogoTestBed
             {
                 double halfY = (boundingBox.Edges[1].NodeB.Y + boundingBox.Edges[1].NodeA.Y) / 2;
 
-                edgeCut.NodeA = new Node() { X = boundingBox.Edges[0].NodeA.X, Y = (int)halfY };
-                edgeCut.NodeB = new Node() { X = boundingBox.Edges[0].NodeB.X, Y = (int)halfY };
+                edgeCut.NodeA = new Node() { X = boundingBox.Edges[0].NodeA.X, Y = halfY };
+                edgeCut.NodeB = new Node() { X = boundingBox.Edges[0].NodeB.X, Y = halfY };
              }
             else
             {
                 double halfX = (boundingBox.Edges[0].NodeB.X + boundingBox.Edges[0].NodeA.X) / 2;
 
-                edgeCut.NodeA = new Node() { X = (int)halfX, Y = boundingBox.Edges[1].NodeA.Y };
-                edgeCut.NodeB = new Node() { X = (int)halfX, Y = boundingBox.Edges[1].NodeB.Y };
+                edgeCut.NodeA = new Node() { X = halfX, Y = boundingBox.Edges[1].NodeA.Y };
+                edgeCut.NodeB = new Node() { X = halfX, Y = boundingBox.Edges[1].NodeB.Y };
             }
 
             #endregion
@@ -188,14 +188,19 @@ namespace CogoTestBed
                     NodeA = nodeToAdd,
                     NodeB = new Node() { X = intersectEdges[0].Item1.NodeB.X, Y = intersectEdges[0].Item1.NodeB.Y }
                 };
-
+                
                 // remove the old edge (it was subdivided)
                 Edges.Remove(intersectEdges[0].Item1);
 
+                bool e1Exists = Edges.FindIndex(e => Math.Abs(e.NodeA.X - e1.NodeA.X) < 0.01 && Math.Abs(e.NodeA.Y - e1.NodeA.Y) < 0.01 &&
+                                                     Math.Abs(e.NodeB.X - e1.NodeB.X) < 0.01 && Math.Abs(e.NodeB.Y - e1.NodeB.Y) < 0.01) > -1,
+                     e2Exists = Edges.FindIndex(e => Math.Abs(e.NodeA.X - e2.NodeA.X) < 0.01 && Math.Abs(e.NodeA.Y - e2.NodeA.Y) < 0.01 &&
+                                                     Math.Abs(e.NodeB.X - e2.NodeB.X) < 0.01 && Math.Abs(e.NodeB.Y - e2.NodeB.Y) < 0.01) > -1;
+
                 // add subdivided edges if they are not a point (length 0)
-                if (e1.NodeA.X != e1.NodeB.X ||e1.NodeA.Y != e1.NodeB.Y)
+                if ((Math.Abs(e1.NodeA.X - e1.NodeB.X) > 0.01 || Math.Abs(e1.NodeA.Y - e1.NodeB.Y) > 0.01 ) && !e1Exists)
                     Edges.Add(e1);
-                if (e2.NodeA.X != e2.NodeB.X || e2.NodeA.Y != e2.NodeB.Y)
+                if ((Math.Abs(e2.NodeA.X - e2.NodeB.X) > 0.01 || Math.Abs(e2.NodeA.Y - e2.NodeB.Y) > 0.01) && !e2Exists)
                     Edges.Add(e2);
 
                 // if this is the first intersection point,
@@ -204,14 +209,15 @@ namespace CogoTestBed
                     nodesToAdd.Add(nodeToAdd);
 
                 // add the intersection edge to the list of edges
-                else
+                else if (Math.Abs(nodesToAdd[0].X - nodeToAdd.X) > 0.01 || Math.Abs(nodesToAdd[0].Y - nodeToAdd.Y) > 0.01)
                 {
                     newEdges.Add(new Edge() { NodeA = nodesToAdd[0], NodeB = nodeToAdd });
                     newEdges.Add(new Edge() { NodeA = nodeToAdd, NodeB = nodesToAdd[0] });
                     nodesToAdd.Clear();
                 }
 
-                newNodes.Add(nodeToAdd);
+                if (newNodes.FindIndex(n => Math.Abs(n.X - nodeToAdd.X) < 0.01 && Math.Abs(n.Y - nodeToAdd.Y) < 0.01) < 0)
+                    newNodes.Add(nodeToAdd);
 
                 // remove the first intersection edge from the list of intersections
                 intersectEdges.RemoveAt(0);
@@ -234,24 +240,28 @@ namespace CogoTestBed
                     // search for edge which appends to the last one
                     Edge nextEdge;
 
-                    if (!newNodes.Contains(newElement[newElement.Count - 1].NodeB) || usedNewEdge)
+                    if (newNodes.FindIndex(n => Math.Abs(n.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
+                                                Math.Abs(n.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01) < 0 || 
+                                                usedNewEdge)
                     {
-                        nextEdge = Edges.Find(el => el.NodeA.X == newElement[newElement.Count - 1].NodeB.X &&
-                                              el.NodeA.Y == newElement[newElement.Count - 1].NodeB.Y) ?? new Edge();
+                        nextEdge = Edges.Find(el => Math.Abs(el.NodeA.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
+                                                    Math.Abs(el.NodeA.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01)
+                                              ?? new Edge();
                         Edges.Remove(nextEdge);
                     }
                     else
                     {
-                        nextEdge = newEdges.Find(el => el.NodeA.X == newElement[newElement.Count - 1].NodeB.X &&
-                                                 el.NodeA.Y == newElement[newElement.Count - 1].NodeB.Y) ?? new Edge();
+                        nextEdge = newEdges.Find(el => Math.Abs(el.NodeA.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
+                                                       Math.Abs(el.NodeA.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01)
+                                                 ?? new Edge();
                         usedNewEdge = true;
                         newEdges.Remove(nextEdge);
                     }
 
                     newElement.Add(nextEdge);
                 }
-                while (newElement[0].NodeA.X != newElement[newElement.Count - 1].NodeB.X ||
-                       newElement[0].NodeA.Y != newElement[newElement.Count - 1].NodeB.Y);
+                while (Math.Abs(newElement[0].NodeA.X - newElement[newElement.Count - 1].NodeB.X) > 0.01 ||
+                       Math.Abs(newElement[0].NodeA.Y - newElement[newElement.Count - 1].NodeB.Y) > 0.01);
 
                 HierarchyElement element = new HierarchyElement();
                 element.Edges = newElement;
@@ -290,13 +300,13 @@ namespace CogoTestBed
                     upperY = edge.NodeB.Y;
 
                 if (lowerX < lowerLeft.X)
-                    lowerLeft.X = (int)lowerX;
+                    lowerLeft.X = lowerX;
                 if (lowerY > lowerLeft.Y)
-                    lowerLeft.Y = (int)lowerY;
+                    lowerLeft.Y = lowerY;
                 if (upperX > upperRight.X)
-                    upperRight.X = (int)upperX;
+                    upperRight.X = upperX;
                 if (upperY < upperRight.Y)
-                    upperRight.Y = (int)upperY;
+                    upperRight.Y = upperY;
             }
 
             HierarchyElement boundingBox = new HierarchyElement();
@@ -340,7 +350,7 @@ namespace CogoTestBed
 
             // parameters of the line to which the intersection edge belongs
             double k1 = int.MaxValue;
-            bool verticalLine = edge.NodeB.X - edge.NodeA.X == 0;
+            bool verticalLine = Math.Abs(edge.NodeB.X - edge.NodeA.X) < 0.01;
             if (!verticalLine)
                 k1 = (edge.NodeB.Y - edge.NodeA.Y) / (edge.NodeB.X - edge.NodeA.X);
             double n1 = edge.NodeA.Y - k1 * edge.NodeA.X;
@@ -365,8 +375,8 @@ namespace CogoTestBed
                     {
                         // find the further cut edge point - that one will not be modified
                         Node nonIntersectPoint = edge.NodeA;
-                        if ((shapeEdge.NodeA.X == nonIntersectPoint.X && shapeEdge.NodeA.Y == nonIntersectPoint.Y) ||
-                            (shapeEdge.NodeB.X == nonIntersectPoint.X && shapeEdge.NodeB.Y == nonIntersectPoint.Y))
+                        if ((Math.Abs(shapeEdge.NodeA.X - nonIntersectPoint.X) < 0.01 && Math.Abs(shapeEdge.NodeA.Y - nonIntersectPoint.Y) < 0.01) ||
+                            (Math.Abs(shapeEdge.NodeB.X - nonIntersectPoint.X) < 0.01 && Math.Abs(shapeEdge.NodeB.Y - nonIntersectPoint.Y) < 0.01))
                         {
                             nonIntersectPoint = edge.NodeB;
                         }
@@ -378,6 +388,9 @@ namespace CogoTestBed
 
                         if (distanceB < distanceA)
                             closerIntersectPoint = shapeEdge.NodeB;
+
+                        if (edge.NodeA == nonIntersectPoint && edge.NodeB == closerIntersectPoint)
+                            continue;
 
                         edge.NodeA = nonIntersectPoint;
                         edge.NodeB = closerIntersectPoint;
@@ -396,11 +409,11 @@ namespace CogoTestBed
 
                     Node intersectionNode;
                     if (!verticalLine)
-                        intersectionNode = new Node() { X = (int)Math.Round(intersectionX), Y = (int)Math.Round(intersectionY) };
+                        intersectionNode = new Node() { X = intersectionX, Y = intersectionY };
                     else
-                        intersectionNode = new Node() { X = edge.NodeA.X, Y = (int)Math.Round(k2 * edge.NodeA.X + n2) };
+                        intersectionNode = new Node() { X = edge.NodeA.X, Y = k2 * edge.NodeA.X + n2 };
 
-                    bool intersection = CheckIfPointLiesOnSegment(shapeEdge, intersectionNode);
+                    bool intersection = CheckIfPointLiesOnSegment(shapeEdge, intersectionNode) && CheckIfPointLiesOnSegment(edge, intersectionNode);
 
                     if (intersection)
                         intersectEdges.Add(new Tuple<Edge, Node>(shapeEdge, intersectionNode));
@@ -424,16 +437,40 @@ namespace CogoTestBed
                 return false;
 
             double dotproduct = (n.X - e.NodeA.X) * (e.NodeB.X - e.NodeA.X) + (n.Y - e.NodeA.Y) * (e.NodeB.Y - e.NodeA.Y);
-            if (dotproduct < 0)
+            if (dotproduct < 0 && Math.Abs(dotproduct) > 0.01)
                 return false;
 
             double squaredlengthba = (e.NodeB.X - e.NodeA.X) * (e.NodeB.X - e.NodeA.X) + (e.NodeB.Y - e.NodeA.Y) * (e.NodeB.Y - e.NodeA.Y);
-            if (dotproduct > squaredlengthba)
+            if (dotproduct > squaredlengthba && Math.Abs(dotproduct - squaredlengthba) > 0.01)
                 return false;
 
             return true;
         }
         
+        /// <summary>
+        /// Perform ray-tracing to check if point is inside of polygon
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public bool RayTracing(Node point)
+        {
+            HierarchyElement boundingBox = CreateBoundingBox();
+
+            // no edge can be drawn, because the end of the bounding box is before the point
+            if (boundingBox.Edges[0].NodeB.X < point.X)
+                return false;
+
+            Edge edge = new Edge()
+            {
+                NodeA = point,
+                NodeB = new Node() { X = boundingBox.Edges[0].NodeB.X, Y = point.Y }
+            };
+
+            List<Tuple<Edge, Node>> intersections = FindEdgesThatIntersect(edge);
+
+            return intersections.Count % 2 == 1;
+        }
+
         #endregion
     }
 }

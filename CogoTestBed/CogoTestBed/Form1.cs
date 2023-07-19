@@ -9,7 +9,7 @@ namespace CogoTestBed
     {
         #region Attributes
 
-        bool drawing = false;
+        bool drawing = false, id = false;
 
         List<HierarchyElement> shapes = new List<HierarchyElement>();
 
@@ -64,11 +64,24 @@ namespace CogoTestBed
             if (!drawing)
                 return;
 
-            drawing = false;
-
             // at least three edges were added to create a shape
-            if (temporaryElement.Edges.Count > 2)
-                shapes.Add(temporaryElement);
+            if (temporaryElement.Edges.Count < 3)
+            {
+                toolStripStatusLabel1.Text = "Shape is not completed, it contains less than 3 edges!";
+                return;
+            }
+
+                // do not let the user finish drawing if loop is not closed
+                if (Math.Abs(temporaryElement.Edges[0].NodeA.X - temporaryElement.Edges[temporaryElement.Edges.Count - 1].NodeB.X) > 0.01 ||
+                Math.Abs(temporaryElement.Edges[0].NodeA.Y - temporaryElement.Edges[temporaryElement.Edges.Count - 1].NodeB.Y) > 0.01)
+            {
+                toolStripStatusLabel1.Text = "The loop was not closed!";
+                return;
+            }
+
+            drawing = false;
+            
+            shapes.Add(temporaryElement);
 
             temporaryElement = null;
             temporaryEdge = null;
@@ -118,6 +131,22 @@ namespace CogoTestBed
         /// <param name="e"></param>
         private void panel1_Click(object sender, EventArgs e)
         {
+            if (id)
+            {
+                Point location = panel1.PointToClient(Cursor.Position);
+                HierarchyElement element = shapes.Find(s => s.RayTracing(new Node() { X = location.X, Y = location.Y }));
+                if (element != null)
+                    toolTip1.SetToolTip(panel1, element.ID.ToString());
+                else
+                    toolTip1.SetToolTip(panel1, "");
+
+                id = false;
+                toolStripStatusLabel1.Text = "";
+                return;
+            }
+            else
+                toolTip1.SetToolTip(panel1, "");
+
             // drawing mode not active - ignore click
             if (!drawing)
             {
@@ -173,6 +202,9 @@ namespace CogoTestBed
         /// <param name="e"></param>
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
+            if (id)
+                toolTip1.SetToolTip(panel1, "");
+
             if (drawing && mouseLine.Count > 0)
             {
                 // show edge moving with the mouse
@@ -197,6 +229,7 @@ namespace CogoTestBed
         /// <param name="e"></param>
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            comboBox3.Text = "Import/export data";
             comboBox2.Items.Clear();
             comboBox2.SelectedIndex = -1;
             comboBox2.Text = "";
@@ -265,6 +298,16 @@ namespace CogoTestBed
             buttonStop_Click(sender, e);
 
             toolStripStatusLabel1.Text = "Finished drawing automatically!";
+        }
+
+        /// <summary>
+        /// Enable identifying shapes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonID_Click(object sender, EventArgs e)
+        {
+            id = true;
         }
 
         #endregion
@@ -381,8 +424,6 @@ namespace CogoTestBed
 
         #endregion
 
-        #endregion
-
         #region Import/Export data
 
         /// <summary>
@@ -402,7 +443,6 @@ namespace CogoTestBed
             else
                 ExportData();
 
-            comboBox3.SelectedIndex = -1;
             comboBox3.Text = "Import/export data";
         }
 
@@ -432,9 +472,11 @@ namespace CogoTestBed
 
                 toolStripStatusLabel1.Text = "Import successfully completed!";
             }
-            
+
             else
                 toolStripStatusLabel1.Text = "Import failed!";
+
+            comboBox3.Text = "Import/export data";
         }
 
         /// <summary>
@@ -463,7 +505,11 @@ namespace CogoTestBed
 
             else
                 toolStripStatusLabel1.Text = "Export failed!";
+
+            comboBox3.Text = "Import/export data";
         }
+
+        #endregion
 
         #endregion
     }
