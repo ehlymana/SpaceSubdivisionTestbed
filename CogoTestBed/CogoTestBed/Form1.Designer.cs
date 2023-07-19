@@ -1,4 +1,4 @@
-﻿namespace CogoTestBed
+﻿namespace SpaceSubdivisionTestbed
 {
     partial class Form1
     {
@@ -316,7 +316,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "CogoTestBed";
+            this.Text = "SpaceSubdivisionTestbed";
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

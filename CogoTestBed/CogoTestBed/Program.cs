@@ -1,4 +1,4 @@
-namespace CogoTestBed
+namespace SpaceSubdivisionTestbed
 {
     internal static class Program
     {

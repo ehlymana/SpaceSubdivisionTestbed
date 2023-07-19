@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace CogoTestBed
+namespace SpaceSubdivisionTestbed
 {
     public partial class Form1 : Form
     {

@@ -6,7 +6,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CogoTestBed
+namespace SpaceSubdivisionTestbed
 {
     public class HierarchyElement
     {
