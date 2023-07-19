@@ -152,15 +152,15 @@ namespace CogoTestBed
             {
                 double halfY = (boundingBox.Edges[1].NodeB.Y + boundingBox.Edges[1].NodeA.Y) / 2;
 
-                edgeCut.NodeA = new Node() { X = boundingBox.Edges[0].NodeA.X, Y = halfY };
-                edgeCut.NodeB = new Node() { X = boundingBox.Edges[0].NodeB.X, Y = halfY };
-            }
+                edgeCut.NodeA = new Node() { X = boundingBox.Edges[0].NodeA.X, Y = (int)halfY };
+                edgeCut.NodeB = new Node() { X = boundingBox.Edges[0].NodeB.X, Y = (int)halfY };
+             }
             else
             {
                 double halfX = (boundingBox.Edges[0].NodeB.X + boundingBox.Edges[0].NodeA.X) / 2;
 
-                edgeCut.NodeA = new Node() { X = halfX, Y = boundingBox.Edges[1].NodeA.Y };
-                edgeCut.NodeB = new Node() { X = halfX, Y = boundingBox.Edges[1].NodeB.Y };
+                edgeCut.NodeA = new Node() { X = (int)halfX, Y = boundingBox.Edges[1].NodeA.Y };
+                edgeCut.NodeB = new Node() { X = (int)halfX, Y = boundingBox.Edges[1].NodeB.Y };
             }
 
             #endregion
@@ -168,6 +168,8 @@ namespace CogoTestBed
             #region Intersections
 
             List<Tuple<Edge, Node>> intersectEdges = FindEdgesThatIntersect(edgeCut);
+            List<Edge> newEdges = new List<Edge>();
+            List<Node> newNodes = new List<Node>();
             List<Node> nodesToAdd = new List<Node>();
 
             while (intersectEdges.Count > 0)
@@ -204,10 +206,12 @@ namespace CogoTestBed
                 // add the intersection edge to the list of edges
                 else
                 {
-                    Edges.Add(new Edge() { NodeA = nodesToAdd[0], NodeB = nodeToAdd });
-                    Edges.Add(new Edge() { NodeA = nodeToAdd, NodeB = nodesToAdd[0] });
+                    newEdges.Add(new Edge() { NodeA = nodesToAdd[0], NodeB = nodeToAdd });
+                    newEdges.Add(new Edge() { NodeA = nodeToAdd, NodeB = nodesToAdd[0] });
                     nodesToAdd.Clear();
                 }
+
+                newNodes.Add(nodeToAdd);
 
                 // remove the first intersection edge from the list of intersections
                 intersectEdges.RemoveAt(0);
@@ -215,296 +219,49 @@ namespace CogoTestBed
 
             #endregion
 
-            /*
+            #region Polygon subdivision
 
-            #region DFS
-
-            // calculate the number of different points in the polygon
-            List<Node> allNodes = new List<Node>();
-
-            foreach (Edge e in Edges)
-            {
-                if (allNodes.FindIndex(node => node.X == e.NodeA.X && node.Y == e.NodeA.Y) == -1)
-                    allNodes.Add(e.NodeA);
-                if (allNodes.FindIndex(node => node.X == e.NodeB.X && node.Y == e.NodeB.Y) == -1)
-                    allNodes.Add(e.NodeB);
-            }
-
-            // create undirected graph adjacency matrix
-            bool[,] adjacencyMatrix = new bool[allNodes.Count, allNodes.Count];
-
-            foreach (Edge e in Edges)
-            {
-                int indexA = allNodes.FindIndex(node => node.X == e.NodeA.X && node.Y == e.NodeA.Y),
-                    indexB = allNodes.FindIndex(node => node.X == e.NodeB.X && node.Y == e.NodeB.Y);
-
-                adjacencyMatrix[indexA, indexB] = true;
-                adjacencyMatrix[indexB, indexA] = true;
-            }
-
-            // perform DFS to find all shapes
-
-            List<Tuple<List<Node>, double>> paths = new List<Tuple<List<Node>, double>>();
-
-            for (int i = 0; i < allNodes.Count; i++)
-            {
-                List<List<int>> pathsOfNode = new List<List<int>>();
-                pathsOfNode.Add(new List<int>() { i });
-                List<int> nodesToCheck = new List<int>() { i };
-                int majorCounter = allNodes.Count,
-                    minorCounter = 1,
-                    totalNeighbors = 0;
-                do
-                {
-                    int currentNode = nodesToCheck[0];
-                    List<int> neighbors = new List<int>();
-                    for (int j = 0; j < allNodes.Count; j++)
-                    {
-                        // do not consider same nodes
-                        if (currentNode == j)
-                            continue;
-
-                        // add new nodes to check
-                        else if (adjacencyMatrix[currentNode, j] == true)
-                            neighbors.Add(j);
-                    }
-
-                    List<List<int>> newPaths = new List<List<int>>();
-                    List<int> pathsDel = new List<int>();
-
-                    for (int k = 0; k < pathsOfNode.Count; k++)
-                    {
-                        // skip paths which end in the starting node - they are a cycle
-                        if (pathsOfNode[k].Count > 3 && pathsOfNode[k][0] == pathsOfNode[k][pathsOfNode[k].Count - 1])
-                            continue;
-
-                        // found a path that appends to the current node
-                        if (pathsOfNode[k][pathsOfNode[k].Count - 1] == currentNode)
-                        {
-                            // add new path for each neighbor
-                            foreach (int node in neighbors)
-                            {
-                                // do not add paths which go back to the same node, e.g. A-B-A
-                                if (pathsOfNode[k].Count > 1 && pathsOfNode[k][pathsOfNode[k].Count - 2] == node)
-                                    continue;
-
-                                // do not add paths which contain the same node again
-                                else if (node != i && pathsOfNode[k].GetRange(0, pathsOfNode[k].Count - 1).Contains(node))
-                                    continue;
-
-                                List<int> newPath = new List<int>();
-                                foreach (int n in pathsOfNode[k])
-                                    newPath.Add(n);
-                                newPath.Add(node);
-                                newPaths.Add(newPath);
-                            }
-                            pathsDel.Add(k);
-                        }
-                    }
-
-                    pathsDel.Sort();
-                    pathsDel.Reverse();
-
-                    foreach (int index in pathsDel)
-                        pathsOfNode.RemoveAt(index);
-                    foreach (List<int> newPath in newPaths)
-                        pathsOfNode.Add(newPath);
-
-                    nodesToCheck.RemoveAt(0);
-
-                    if (minorCounter == 1)
-                    {
-                        minorCounter = totalNeighbors + neighbors.Count;
-                        totalNeighbors = 0;
-                        majorCounter--;
-                    }
-                    else
-                    {
-                        minorCounter--;
-                        totalNeighbors += neighbors.Count;
-                    }
-
-                    foreach (int neighbor in neighbors)
-                        nodesToCheck.Add(neighbor);
-                }
-                while (nodesToCheck.Count > 0 && majorCounter > 0);
-
-                for (int j = 0; j < pathsOfNode.Count; j++)
-                {
-                    for (int k = j + 1; k < pathsOfNode.Count; k++)
-                    {
-                        if (Enumerable.SequenceEqual(pathsOfNode[j].OrderBy(e => e), pathsOfNode[k].OrderBy(e => e)))
-                        {
-                            pathsOfNode.RemoveAt(k);
-                            k--;
-                        }
-                    }
-                }
-
-                foreach (List<int> path in pathsOfNode)
-                {
-                    List<Node> singlePath = new List<Node>();
-                    double length = 0;
-
-                    // only consider cyclic paths
-                    if (path[0] != path[path.Count - 1])
-                        continue;
-
-                    // formulate path and length
-                    for (int j = 0; j < path.Count; j++)
-                    {
-                        if (j > 0)
-                            length += Math.Sqrt(Math.Pow(allNodes[path[j]].X - allNodes[path[j - 1]].X, 2) + Math.Pow(allNodes[path[j]].Y - allNodes[path[j - 1]].Y, 2));
-
-                        singlePath.Add(allNodes[path[j]]);
-                    }
-
-                    paths.Add(new Tuple<List<Node>, double>(singlePath, length));
-                }          
-            }
-
-            /*int counter = 0;
-            while (counter < allNodes.Count * allNodes.Count)
-            {
-                List<Node> path = new List<Node>();
-                int i = 0, j = 0;
-                counter = 0;
-                double length = 0;
-                while (i < allNodes.Count)
-                {
-                    // no neighborhood - skip element
-                    if (!adjacencyMatrix[i, j])
-                    {
-                        counter++;
-                        if (j < allNodes.Count - 1)
-                            j++;
-                        else
-                        {
-                            i++;
-                            j = 0;
-                        }
-                    }
-                    // first nodes to be added to the path - add both
-                    else if (path.Count == 0)
-                    {
-                        path.Add(allNodes[i]);
-                        path.Add(allNodes[j]);
-
-                        length += Math.Sqrt(Math.Pow(allNodes[i].X - allNodes[j].X, 2) + Math.Pow(allNodes[i].Y - allNodes[j].Y, 2));
-
-                        // delete adjacency
-                        adjacencyMatrix[i, j] = false;
-
-                        i = j;
-                        j = 0;
-                    }
-                    // not the first node to be added to the path
-                    // don't add same node or if returning to the previous node (e.g. AB - BA)
-                    else if (i == j || (path.Count > 1 && allNodes[j] == path[path.Count - 2]))
-                    {
-                        counter++;
-                        if (j < allNodes.Count - 1)
-                            j++;
-                        else
-                        {
-                            i++;
-                            j = 0;
-                        }
-                    }
-                    // found new adjacency - add it to the path
-                    else
-                    {
-                        path.Add(allNodes[j]);
-
-                        length += Math.Sqrt(Math.Pow(path[path.Count - 2].X - allNodes[j].X, 2) + Math.Pow(path[path.Count - 2].Y - allNodes[j].Y, 2));
-
-                        // delete adjacency
-                        adjacencyMatrix[i, j] = false;
-
-                        i = j;
-                        j = 0;
-                    }
-                    // if the first and last node of path are the same, path is complete
-                    if (path.Count > 2 && path[0].X == path[path.Count - 1].X && path[0].Y == path[path.Count - 1].Y)
-                        break;
-                }
-                if (path.Count > 2)
-                    paths.Add(new Tuple<List<Node>, double>(path, length));
-            }
-
-            #endregion
-
-            #region Final paths
-
-            // delete redundant paths
-
-            List<int> pathsToDelete = new List<int>();
-
-            for (int i = 0; i < paths.Count; i++)
-            {
-                for (int j = i + 1; j < paths.Count; j++)
-                {
-                    // skip same paths
-                    if (i == j)
-                        continue;
-                    int numberOfNodes = paths[i].Item1.Count;
-                    for (int k = 0; k < paths[j].Item1.Count; k++)
-                    {
-                        // path contains node
-                        if (paths[i].Item1.FindIndex(node => node.X == paths[j].Item1[k].X && node.Y == paths[j].Item1[k].Y) > -1)
-                            numberOfNodes--;
-                        // all nodes the same - this path needs to be deleted
-                        if (numberOfNodes == 0)
-                            break;
-                    }
-
-                    // add path for deleting if it is redundant
-                    // delete the longer path
-                    if (numberOfNodes == 0 && paths[i].Item1.Count < paths[j].Item1.Count && !pathsToDelete.Contains(j))
-                        pathsToDelete.Add(j);
-                    else if (numberOfNodes == 0 && !pathsToDelete.Contains(i))
-                        pathsToDelete.Add(i);
-                }
-            }
-
-            pathsToDelete.Sort();
-            pathsToDelete.Reverse();
-
-            foreach (int index in pathsToDelete)
-                paths.RemoveAt(index);
-
-
-            #endregion
-
-            #region New polygons
-
-            // sort paths by length increasingly
-            paths = paths.OrderBy(p => p.Item2).ToList();
-
-            // formulate new elements
             List<HierarchyElement> newElements = new List<HierarchyElement>();
 
-            foreach (Tuple<List<Node>, double> path in paths)
+            while (Edges.Count > 0)
             {
-                HierarchyElement newShape = new HierarchyElement();
-                for (int i = 0; i < path.Item1.Count - 1; i++)
+                List<Edge> newElement = new List<Edge>();
+                newElement.Add(Edges[0]);
+                Edges.RemoveAt(0);
+                bool usedNewEdge = false;
+                do
                 {
-                    newShape.Edges.Add(new Edge()
+                    // search for edge which appends to the last one
+                    Edge nextEdge;
+
+                    if (!newNodes.Contains(newElement[newElement.Count - 1].NodeB) || usedNewEdge)
                     {
-                        NodeA = new Node() { X = path.Item1[i].X, Y = path.Item1[i].Y },
-                        NodeB = new Node() { X = path.Item1[i + 1].X, Y = path.Item1[i + 1].Y }
-                    });
+                        nextEdge = Edges.Find(el => el.NodeA.X == newElement[newElement.Count - 1].NodeB.X &&
+                                              el.NodeA.Y == newElement[newElement.Count - 1].NodeB.Y) ?? new Edge();
+                        Edges.Remove(nextEdge);
+                    }
+                    else
+                    {
+                        nextEdge = newEdges.Find(el => el.NodeA.X == newElement[newElement.Count - 1].NodeB.X &&
+                                                 el.NodeA.Y == newElement[newElement.Count - 1].NodeB.Y) ?? new Edge();
+                        usedNewEdge = true;
+                        newEdges.Remove(nextEdge);
+                    }
+
+                    newElement.Add(nextEdge);
                 }
-                newElements.Add(newShape);
+                while (newElement[0].NodeA.X != newElement[newElement.Count - 1].NodeB.X ||
+                       newElement[0].NodeA.Y != newElement[newElement.Count - 1].NodeB.Y);
+
+                HierarchyElement element = new HierarchyElement();
+                element.Edges = newElement;
+
+                newElements.Add(element);
             }
 
             return newElements;
 
             #endregion
-
-            */
-
-            return null;
         }
 
         /// <summary>
@@ -533,13 +290,13 @@ namespace CogoTestBed
                     upperY = edge.NodeB.Y;
 
                 if (lowerX < lowerLeft.X)
-                    lowerLeft.X = lowerX;
+                    lowerLeft.X = (int)lowerX;
                 if (lowerY > lowerLeft.Y)
-                    lowerLeft.Y = lowerY;
+                    lowerLeft.Y = (int)lowerY;
                 if (upperX > upperRight.X)
-                    upperRight.X = upperX;
+                    upperRight.X = (int)upperX;
                 if (upperY < upperRight.Y)
-                    upperRight.Y = upperY;
+                    upperRight.Y = (int)upperY;
             }
 
             HierarchyElement boundingBox = new HierarchyElement();
@@ -587,36 +344,69 @@ namespace CogoTestBed
             if (!verticalLine)
                 k1 = (edge.NodeB.Y - edge.NodeA.Y) / (edge.NodeB.X - edge.NodeA.X);
             double n1 = edge.NodeA.Y - k1 * edge.NodeA.X;
+            bool changeHappened = false;
 
-            // check if each edge of the shape intersects
-            foreach(Edge shapeEdge in Edges)
+            // possible that this process needs to be done multiple times due to same lines
+            do
             {
-                // parameters of the line to which the current edge belongs
-                double k2 = int.MaxValue;
-                if (shapeEdge.NodeB.X - shapeEdge.NodeA.X != 0)
-                    k2 = (shapeEdge.NodeB.Y - shapeEdge.NodeA.Y) / (shapeEdge.NodeB.X - shapeEdge.NodeA.X);
-                double n2 = shapeEdge.NodeA.Y - k2 * shapeEdge.NodeA.X;
+                intersectEdges.Clear();
+                changeHappened = false;
+                // check if each edge of the shape intersects
+                foreach (Edge shapeEdge in Edges)
+                {
+                    // parameters of the line to which the current edge belongs
+                    double k2 = int.MaxValue;
+                    if (shapeEdge.NodeB.X - shapeEdge.NodeA.X != 0)
+                        k2 = (shapeEdge.NodeB.Y - shapeEdge.NodeA.Y) / (shapeEdge.NodeB.X - shapeEdge.NodeA.X);
+                    double n2 = shapeEdge.NodeA.Y - k2 * shapeEdge.NodeA.X;
 
-                // lines are parallel and do not intersect
-                if (Math.Abs(k1 - k2) < 0.01)
-                    continue;
+                    // lines are the same - special case
+                    if (Math.Abs(k1 - k2) < 0.01 && Math.Abs(n1 - n2) < 0.01)
+                    {
+                        // find the further cut edge point - that one will not be modified
+                        Node nonIntersectPoint = edge.NodeA;
+                        if ((shapeEdge.NodeA.X == nonIntersectPoint.X && shapeEdge.NodeA.Y == nonIntersectPoint.Y) ||
+                            (shapeEdge.NodeB.X == nonIntersectPoint.X && shapeEdge.NodeB.Y == nonIntersectPoint.Y))
+                        {
+                            nonIntersectPoint = edge.NodeB;
+                        }
 
-                // check if intersection happens outside of segment
-                double intersectionX = (-1 * n2 + n1) / (-1 * k1 + k2),
-                       intersectionY = (k2 * n1 - k1 * n2) / (-1 * k1 + k2);
+                        // find the closer edge point - that one will be replaced
+                        Node closerIntersectPoint = shapeEdge.NodeA;
+                        double distanceA = Math.Sqrt(Math.Pow((shapeEdge.NodeA.X - nonIntersectPoint.X), 2) + Math.Pow((shapeEdge.NodeA.Y - nonIntersectPoint.Y), 2)),
+                               distanceB = Math.Sqrt(Math.Pow((shapeEdge.NodeB.X - nonIntersectPoint.X), 2) + Math.Pow((shapeEdge.NodeB.Y - nonIntersectPoint.Y), 2));
 
-                Node intersectionNode;
-                if (!verticalLine)
-                    intersectionNode = new Node() { X = intersectionX, Y = intersectionY };
-                else
-                    intersectionNode = new Node() { X = edge.NodeA.X, Y = k2 * edge.NodeA.X + n2 };
+                        if (distanceB < distanceA)
+                            closerIntersectPoint = shapeEdge.NodeB;
 
-                bool intersection = CheckIfPointLiesOnSegment(shapeEdge, intersectionNode);
+                        edge.NodeA = nonIntersectPoint;
+                        edge.NodeB = closerIntersectPoint;
 
-                if (intersection)
-                    intersectEdges.Add(new Tuple<Edge, Node>(shapeEdge, intersectionNode));
+                        changeHappened = true;
+                        break;
+                    }
+
+                    // lines are parallel and do not intersect
+                    else if (Math.Abs(k1 - k2) < 0.01)
+                        continue;
+
+                    // check if intersection happens outside of segment
+                    double intersectionX = (-1 * n2 + n1) / (-1 * k1 + k2),
+                           intersectionY = (k2 * n1 - k1 * n2) / (-1 * k1 + k2);
+
+                    Node intersectionNode;
+                    if (!verticalLine)
+                        intersectionNode = new Node() { X = (int)Math.Round(intersectionX), Y = (int)Math.Round(intersectionY) };
+                    else
+                        intersectionNode = new Node() { X = edge.NodeA.X, Y = (int)Math.Round(k2 * edge.NodeA.X + n2) };
+
+                    bool intersection = CheckIfPointLiesOnSegment(shapeEdge, intersectionNode);
+
+                    if (intersection)
+                        intersectEdges.Add(new Tuple<Edge, Node>(shapeEdge, intersectionNode));
+                }
             }
-
+            while (changeHappened);
             return intersectEdges;
         }
 
