@@ -366,12 +366,12 @@ namespace SpaceSubdivisionTestbed
                 {
                     // parameters of the line to which the current edge belongs
                     double k2 = int.MaxValue;
-                    if (shapeEdge.NodeB.X - shapeEdge.NodeA.X != 0)
+                    if (Math.Abs(shapeEdge.NodeB.X - shapeEdge.NodeA.X) > 0.01)
                         k2 = (shapeEdge.NodeB.Y - shapeEdge.NodeA.Y) / (shapeEdge.NodeB.X - shapeEdge.NodeA.X);
                     double n2 = shapeEdge.NodeA.Y - k2 * shapeEdge.NodeA.X;
 
                     // lines are the same - special case
-                    if (Math.Abs(k1 - k2) < 0.01 && Math.Abs(n1 - n2) < 0.01)
+                    if (Math.Abs(k1 - k2) < 0.01 && (Math.Abs(n1 - n2) < 0.01 || (k1 == int.MaxValue && Math.Abs(shapeEdge.NodeA.X - edge.NodeA.X) < 0.01)))
                     {
                         // find the further cut edge point - that one will not be modified
                         Node nonIntersectPoint = edge.NodeA;

@@ -61,27 +61,24 @@ namespace SpaceSubdivisionTestbed
         /// <param name="e"></param>
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            toolStripStatusLabel1.Text = "";
+
             if (!drawing)
                 return;
 
             // at least three edges were added to create a shape
             if (temporaryElement.Edges.Count < 3)
-            {
                 toolStripStatusLabel1.Text = "Shape is not completed, it contains less than 3 edges!";
-                return;
-            }
 
-                // do not let the user finish drawing if loop is not closed
-                if (Math.Abs(temporaryElement.Edges[0].NodeA.X - temporaryElement.Edges[temporaryElement.Edges.Count - 1].NodeB.X) > 0.01 ||
+            // do not let the user finish drawing if loop is not closed
+            else if (Math.Abs(temporaryElement.Edges[0].NodeA.X - temporaryElement.Edges[temporaryElement.Edges.Count - 1].NodeB.X) > 0.01 ||
                 Math.Abs(temporaryElement.Edges[0].NodeA.Y - temporaryElement.Edges[temporaryElement.Edges.Count - 1].NodeB.Y) > 0.01)
-            {
-                toolStripStatusLabel1.Text = "The loop was not closed!";
-                return;
-            }
+                    toolStripStatusLabel1.Text = "The loop was not closed!";
 
             drawing = false;
             
-            shapes.Add(temporaryElement);
+            if (toolStripStatusLabel1.Text.Length < 1)
+                shapes.Add(temporaryElement);
 
             temporaryElement = null;
             temporaryEdge = null;
