@@ -53,6 +53,9 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonShape = new System.Windows.Forms.Button();
+            this.buttonArea = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -94,14 +97,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(32, 209);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 169);
+            this.groupBox1.Size = new System.Drawing.Size(367, 157);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Manual insertion";
             // 
             // buttonInsert
             // 
-            this.buttonInsert.Location = new System.Drawing.Point(136, 117);
+            this.buttonInsert.Location = new System.Drawing.Point(128, 107);
             this.buttonInsert.Name = "buttonInsert";
             this.buttonInsert.Size = new System.Drawing.Size(75, 23);
             this.buttonInsert.TabIndex = 4;
@@ -111,7 +114,7 @@
             // 
             // numericUpDown2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(136, 63);
+            this.numericUpDown2.Location = new System.Drawing.Point(169, 59);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -123,7 +126,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(136, 33);
+            this.numericUpDown1.Location = new System.Drawing.Point(169, 29);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -136,7 +139,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(28, 65);
+            this.label2.Location = new System.Drawing.Point(61, 61);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 15);
             this.label2.TabIndex = 1;
@@ -145,7 +148,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 35);
+            this.label1.Location = new System.Drawing.Point(61, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 15);
             this.label1.TabIndex = 0;
@@ -153,6 +156,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.buttonLoop);
             this.groupBox2.Controls.Add(this.labelY);
             this.groupBox2.Controls.Add(this.labelX);
@@ -167,9 +171,9 @@
             // 
             // buttonLoop
             // 
-            this.buttonLoop.Location = new System.Drawing.Point(181, 85);
+            this.buttonLoop.Location = new System.Drawing.Point(28, 109);
             this.buttonLoop.Name = "buttonLoop";
-            this.buttonLoop.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoop.Size = new System.Drawing.Size(111, 23);
             this.buttonLoop.TabIndex = 4;
             this.buttonLoop.Text = "Close loop";
             this.buttonLoop.UseVisualStyleBackColor = true;
@@ -178,7 +182,8 @@
             // labelY
             // 
             this.labelY.AutoSize = true;
-            this.labelY.Location = new System.Drawing.Point(170, 59);
+            this.labelY.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelY.Location = new System.Drawing.Point(203, 109);
             this.labelY.Name = "labelY";
             this.labelY.Size = new System.Drawing.Size(17, 15);
             this.labelY.TabIndex = 3;
@@ -187,15 +192,16 @@
             // labelX
             // 
             this.labelX.AutoSize = true;
-            this.labelX.Location = new System.Drawing.Point(170, 34);
+            this.labelX.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelX.Location = new System.Drawing.Point(203, 77);
             this.labelX.Name = "labelX";
-            this.labelX.Size = new System.Drawing.Size(17, 15);
+            this.labelX.Size = new System.Drawing.Size(18, 15);
             this.labelX.TabIndex = 2;
             this.labelX.Text = "X:";
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(28, 85);
+            this.buttonStop.Location = new System.Drawing.Point(28, 73);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(113, 23);
             this.buttonStop.TabIndex = 1;
@@ -215,34 +221,36 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonArea);
+            this.groupBox3.Controls.Add(this.buttonShape);
+            this.groupBox3.Controls.Add(this.richTextBox1);
             this.groupBox3.Controls.Add(this.buttonID);
             this.groupBox3.Controls.Add(this.comboBox2);
             this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.richTextBox1);
             this.groupBox3.Controls.Add(this.buttonSubdivide);
-            this.groupBox3.Location = new System.Drawing.Point(32, 396);
+            this.groupBox3.Location = new System.Drawing.Point(32, 372);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(367, 236);
+            this.groupBox3.Size = new System.Drawing.Size(367, 260);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Subdivision";
             // 
             // buttonID
             // 
-            this.buttonID.Location = new System.Drawing.Point(130, 72);
+            this.buttonID.Location = new System.Drawing.Point(231, 37);
             this.buttonID.Name = "buttonID";
-            this.buttonID.Size = new System.Drawing.Size(75, 23);
+            this.buttonID.Size = new System.Drawing.Size(118, 23);
             this.buttonID.TabIndex = 6;
-            this.buttonID.Text = "Identify";
+            this.buttonID.Text = "Identify element";
             this.buttonID.UseVisualStyleBackColor = true;
             this.buttonID.Click += new System.EventHandler(this.buttonID_Click);
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(130, 34);
+            this.comboBox2.Location = new System.Drawing.Point(16, 73);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(219, 23);
+            this.comboBox2.Size = new System.Drawing.Size(187, 23);
             this.comboBox2.TabIndex = 5;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
@@ -257,18 +265,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 152);
+            this.richTextBox1.Location = new System.Drawing.Point(16, 164);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(333, 66);
+            this.richTextBox1.Size = new System.Drawing.Size(333, 77);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "Output messages:";
             // 
             // buttonSubdivide
             // 
-            this.buttonSubdivide.Location = new System.Drawing.Point(104, 114);
+            this.buttonSubdivide.Location = new System.Drawing.Point(231, 66);
             this.buttonSubdivide.Name = "buttonSubdivide";
-            this.buttonSubdivide.Size = new System.Drawing.Size(152, 23);
+            this.buttonSubdivide.Size = new System.Drawing.Size(118, 23);
             this.buttonSubdivide.TabIndex = 0;
             this.buttonSubdivide.Text = "Begin subdivision";
             this.buttonSubdivide.UseVisualStyleBackColor = true;
@@ -303,6 +311,35 @@
             this.comboBox3.TabIndex = 1;
             this.comboBox3.Text = "Import/export data";
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // buttonShape
+            // 
+            this.buttonShape.Location = new System.Drawing.Point(231, 95);
+            this.buttonShape.Name = "buttonShape";
+            this.buttonShape.Size = new System.Drawing.Size(118, 23);
+            this.buttonShape.TabIndex = 7;
+            this.buttonShape.Text = "Determine shape";
+            this.buttonShape.UseVisualStyleBackColor = true;
+            this.buttonShape.Click += new System.EventHandler(this.buttonShape_Click);
+            // 
+            // buttonArea
+            // 
+            this.buttonArea.Location = new System.Drawing.Point(231, 124);
+            this.buttonArea.Name = "buttonArea";
+            this.buttonArea.Size = new System.Drawing.Size(118, 23);
+            this.buttonArea.TabIndex = 8;
+            this.buttonArea.Text = "Calculate area";
+            this.buttonArea.UseVisualStyleBackColor = true;
+            this.buttonArea.Click += new System.EventHandler(this.buttonArea_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(194, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Coordinates:";
             // 
             // Form1
             // 
@@ -359,5 +396,8 @@
         private ComboBox comboBox3;
         private ToolTip toolTip1;
         private Button buttonID;
+        private Label label3;
+        private Button buttonArea;
+        private Button buttonShape;
     }
 }

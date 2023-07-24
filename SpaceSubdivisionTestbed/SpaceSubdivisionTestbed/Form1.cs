@@ -30,8 +30,6 @@ namespace SpaceSubdivisionTestbed
 
         #endregion
 
-        #region Methods
-
         #region Drawing (graphical)
 
         /// <summary>
@@ -201,6 +199,10 @@ namespace SpaceSubdivisionTestbed
         {
             if (id)
                 toolTip1.SetToolTip(panel1, "");
+
+            // do not flicker if the location did not change
+            if (labelX.Text == "X: " + e.Location.X && labelY.Text == "Y: " + e.Location.Y)
+                return;
 
             if (drawing && mouseLine.Count > 0)
             {
@@ -394,19 +396,14 @@ namespace SpaceSubdivisionTestbed
 
             // determine which shape is selected
             string item = comboBox2.SelectedItem.ToString().Split(",")[0];
-            HierarchyElement shape = shapes.Find(x => x.ID == Int32.Parse(item));
-
+            HierarchyElement shape = shapes.Find(x => x.ID == Int32.Parse(item)) ?? new HierarchyElement();
+            
             if (shape == null)
                 return;
 
-            // determine the shape of the element
-            shape.DetermineShapeType();
-
-            richTextBox1.Text = "Input shape type: " + shape.ShapeType.ToString() + "\n";
-
             List<HierarchyElement> newShapes = shape.Subdivide();
 
-            richTextBox1.Text += "Subdivision complete! Total new shapes: " + newShapes.Count + "\n";
+            richTextBox1.Text = "Subdivision complete! Total new shapes: " + newShapes.Count + "\n";
 
             // remove the old shape from hierarchy elements
             shapes.Remove(shape);
@@ -507,6 +504,56 @@ namespace SpaceSubdivisionTestbed
         }
 
         #endregion
+
+        #region Shape metadata
+
+        /// <summary>
+        /// Determine input element shape
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonShape_Click(object sender, EventArgs e)
+        {
+            // if no item is selected, do nothing
+            if (comboBox2.SelectedItem == null)
+                return;
+
+            // determine which shape is selected
+            string item = comboBox2.SelectedItem.ToString().Split(",")[0];
+            HierarchyElement shape = shapes.Find(x => x.ID == Int32.Parse(item));
+
+            if (shape == null)
+                return;
+
+            // determine the shape of the element
+            shape.DetermineShapeType();
+
+            richTextBox1.Text = "Input shape type: " + shape.ShapeType.ToString() + "\n";
+        }
+
+        /// <summary>
+        /// Determine input element area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonArea_Click(object sender, EventArgs e)
+        {
+            // if no item is selected, do nothing
+            if (comboBox2.SelectedItem == null)
+                return;
+
+            // determine which shape is selected
+            string item = comboBox2.SelectedItem.ToString().Split(",")[0];
+            HierarchyElement shape = shapes.Find(x => x.ID == Int32.Parse(item));
+
+            if (shape == null)
+                return;
+
+            // determine the shape of the element
+            double area = shape.DetermineArea();
+
+            richTextBox1.Text = "Input shape area: " + area + "\n";
+        }
 
         #endregion
     }

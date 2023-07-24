@@ -471,6 +471,22 @@ namespace SpaceSubdivisionTestbed
             return intersections.Count % 2 == 1;
         }
 
+        /// <summary>
+        /// Calculate area of polygon using the sum of cross-products of edge segments
+        /// </summary>
+        /// <returns></returns>
+        public double DetermineArea()
+        {
+            double area = 0;
+            foreach (Edge e in Edges)
+            {
+                area += e.NodeA.X * e.NodeB.Y - e.NodeB.X * e.NodeA.Y;
+            }
+
+            area = 0.5 * Math.Abs(area);
+            return area;
+        }
+
         #endregion
     }
 }
