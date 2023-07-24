@@ -36,7 +36,7 @@ To initiate drawing, the user first needs to click on the *Start drawing* button
 
 An example of graphical drawing is shown below.
 
-![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/draw.gif)
+![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/draw.gif?token=GHSAT0AAAAAACAD4E35CTWKEJSUKEQ7QSVEZF6YTGA)
 
 2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button.
 
