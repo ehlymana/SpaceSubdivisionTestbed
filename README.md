@@ -26,7 +26,7 @@ SpaceSubdivisionTestbed/SpaceSubdivisionTestbed/SpaceSubdivisionTestbed.sln
 
 The user interface of the application is shown below. It consists of four main features which will be explained next.
 
-![](https:://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/initial_UI.png)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/initial_UI.png)
 
 ### 1. Drawing shapes
 
@@ -36,13 +36,13 @@ To initiate drawing, the user first needs to click on the *Start drawing* button
 
 An example of graphical drawing is shown below.
 
-![](https:://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/draw.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/draw.gif)
 
 2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button.
 
 An example of manual insertion is shown below.
 
-![](https:://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/manual.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/manual.gif)
 
 The process of drawing a shape is finished when the final node is equal to the starting node. In order to achieve this, the user can either graphically or manually specify this node (and create the final edge) and then click on the *Finish drawing* button. Alternatively, the user can click on the *Close loop* button which will automatically add the final edge and finish drawing the shape.
 
@@ -60,7 +60,7 @@ After selecting the desired existing shape and clicking on the *Begin subdivisio
 
 An example of shape subdivision and identification is shown below.
 
-![](https:://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/subdivision.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/subdivision.gif)
 
 c) Determining shape type
 
@@ -74,7 +74,7 @@ After selecting the desired shape, the user can click on the *Calculate area* bu
 
 An example of shape subdivision and identification is shown below.
 
-![](https:://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/shape.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/README figures/shape.gif)
 
 ### 3. Data persistence
 
