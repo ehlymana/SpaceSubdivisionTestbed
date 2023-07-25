@@ -10,7 +10,11 @@ namespace SpaceSubdivisionTestbed
 {
     public class HierarchyElement
     {
+        #region Attributes
+
         static int counter = 1;
+
+        #endregion
 
         #region Properties
 
@@ -63,6 +67,7 @@ namespace SpaceSubdivisionTestbed
         /// </summary>
         public void DetermineShapeType()
         {
+            bool rectangularInitialCheck = false;
             // check if the shape is rectangular
             // rectangular shapes have exactly four edges
             if (Edges.Count == 4)
@@ -77,10 +82,7 @@ namespace SpaceSubdivisionTestbed
 
                 // if lengths of diagonals are the same, the shape is a rectangle
                 if (Math.Abs(diagonal1 - diagonal2) < 0.001)
-                {
-                    ShapeType = ShapeType.Rectangular;
-                    return;
-                }
+                    rectangularInitialCheck = true;
             }
 
             // check the angles between all edges
@@ -115,11 +117,15 @@ namespace SpaceSubdivisionTestbed
                 sum += 180 - theta;
             }
 
-            // all angles exactly 90 degrees - the shape is axis-aligned
-            if (angles.All(x => x % 90 == 0))
+            // initial rectangular check passed and all angles 90 degrees - the shape is convex
+            if (rectangularInitialCheck && angles.All(x => x == 90))
+                ShapeType = ShapeType.Rectangular;
+
+            // all angles divisible by 90 degrees - the shape is axis-aligned
+            else if (angles.All(x => x % 90 == 0))
                 ShapeType = ShapeType.AxisAligned;
 
-            // convex shapes always have less than 180 degrees
+            // convex shapes always have angles of less than 180 degrees
             else if (Math.Abs(sum -  360) < 0.5)
                 ShapeType = ShapeType.Convex;
 
