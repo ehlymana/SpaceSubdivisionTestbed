@@ -38,24 +38,25 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.buttonLoop = new System.Windows.Forms.Button();
             this.labelY = new System.Windows.Forms.Label();
             this.labelX = new System.Windows.Forms.Label();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonDraw = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonArea = new System.Windows.Forms.Button();
+            this.buttonShape = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonID = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonSubdivide = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonShape = new System.Windows.Forms.Button();
-            this.buttonArea = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -169,6 +170,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Graphical drawing";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(194, 42);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Coordinates:";
+            // 
             // buttonLoop
             // 
             this.buttonLoop.Location = new System.Drawing.Point(28, 109);
@@ -221,6 +231,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.buttonArea);
             this.groupBox3.Controls.Add(this.buttonShape);
             this.groupBox3.Controls.Add(this.richTextBox1);
@@ -234,6 +245,46 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Subdivision";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(78, 115);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = "Invert";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonArea
+            // 
+            this.buttonArea.Location = new System.Drawing.Point(231, 124);
+            this.buttonArea.Name = "buttonArea";
+            this.buttonArea.Size = new System.Drawing.Size(118, 23);
+            this.buttonArea.TabIndex = 8;
+            this.buttonArea.Text = "Calculate area";
+            this.buttonArea.UseVisualStyleBackColor = true;
+            this.buttonArea.Click += new System.EventHandler(this.buttonArea_Click);
+            // 
+            // buttonShape
+            // 
+            this.buttonShape.Location = new System.Drawing.Point(231, 95);
+            this.buttonShape.Name = "buttonShape";
+            this.buttonShape.Size = new System.Drawing.Size(118, 23);
+            this.buttonShape.TabIndex = 7;
+            this.buttonShape.Text = "Determine shape";
+            this.buttonShape.UseVisualStyleBackColor = true;
+            this.buttonShape.Click += new System.EventHandler(this.buttonShape_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(16, 164);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(333, 77);
+            this.richTextBox1.TabIndex = 1;
+            this.richTextBox1.Text = "Output messages:";
             // 
             // buttonID
             // 
@@ -262,15 +313,6 @@
             this.label4.Size = new System.Drawing.Size(102, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "Element to divide:";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(16, 164);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(333, 77);
-            this.richTextBox1.TabIndex = 1;
-            this.richTextBox1.Text = "Output messages:";
             // 
             // buttonSubdivide
             // 
@@ -311,35 +353,6 @@
             this.comboBox3.TabIndex = 1;
             this.comboBox3.Text = "Import/export data";
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
-            // 
-            // buttonShape
-            // 
-            this.buttonShape.Location = new System.Drawing.Point(231, 95);
-            this.buttonShape.Name = "buttonShape";
-            this.buttonShape.Size = new System.Drawing.Size(118, 23);
-            this.buttonShape.TabIndex = 7;
-            this.buttonShape.Text = "Determine shape";
-            this.buttonShape.UseVisualStyleBackColor = true;
-            this.buttonShape.Click += new System.EventHandler(this.buttonShape_Click);
-            // 
-            // buttonArea
-            // 
-            this.buttonArea.Location = new System.Drawing.Point(231, 124);
-            this.buttonArea.Name = "buttonArea";
-            this.buttonArea.Size = new System.Drawing.Size(118, 23);
-            this.buttonArea.TabIndex = 8;
-            this.buttonArea.Text = "Calculate area";
-            this.buttonArea.UseVisualStyleBackColor = true;
-            this.buttonArea.Click += new System.EventHandler(this.buttonArea_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Coordinates:";
             // 
             // Form1
             // 
@@ -399,5 +412,6 @@
         private Label label3;
         private Button buttonArea;
         private Button buttonShape;
+        private Button button1;
     }
 }

@@ -67,27 +67,8 @@ namespace SpaceSubdivisionTestbed
         /// </summary>
         public void DetermineShapeType()
         {
-            bool rectangularInitialCheck = false;
-            // check if the shape is rectangular
-            // rectangular shapes have exactly four edges
-            if (Edges.Count == 4)
-            {
-                // calculate lengths of diagonals
-                double a1 = Edges[1].NodeB.X - Edges[0].NodeA.X,
-                       b1 = Edges[1].NodeB.Y - Edges[0].NodeA.Y,
-                       a2 = Edges[1].NodeA.X - Edges[3].NodeA.X,
-                       b2 = Edges[3].NodeA.Y - Edges[1].NodeA.Y;
-                double diagonal1 = Math.Sqrt(a1 * a1 + b1 * b1),
-                       diagonal2 = Math.Sqrt(a2 * a2 + b2 * b2);
-
-                // if lengths of diagonals are the same, the shape is a rectangle
-                if (Math.Abs(diagonal1 - diagonal2) < 0.001)
-                    rectangularInitialCheck = true;
-            }
-
             // check the angles between all edges
             List<double> angles = new List<double>();
-            double sum = 0;
 
             for (int i = 0; i < Edges.Count; i++)
             {
@@ -95,7 +76,7 @@ namespace SpaceSubdivisionTestbed
                 int nextIndex = i + 1;
                 if (i + 1 == Edges.Count)
                     nextIndex = 0;
-
+                
                 // calculate angle between three points on the polygon
                 Node A = new Node();
                 A.X = Edges[i].NodeA.X - Edges[i].NodeB.X;
@@ -108,30 +89,53 @@ namespace SpaceSubdivisionTestbed
                 double ALen = Math.Sqrt(Math.Pow(A.X, 2) + Math.Pow(A.Y, 2));
                 double BLen = Math.Sqrt(Math.Pow(B.X, 2) + Math.Pow(B.Y, 2));
 
+                // calculate angle
                 double dotProduct = A.X * B.X + A.Y * B.Y;
+                double p = Math.Acos(dotProduct / (ALen * BLen));
+                double angle = (180 / Math.PI) * Math.Acos(dotProduct / (ALen * BLen));
 
-                double theta = (180 / Math.PI) * Math.Acos(dotProduct / (ALen * BLen));
+                // get direction of angle so that angle can be inverted if necessary
+                double d = direction(Edges[i].NodeA.X, Edges[i].NodeA.Y, Edges[i].NodeB.X, Edges[i].NodeB.Y, Edges[nextIndex].NodeB.X, Edges[nextIndex].NodeB.Y);
+                
+                if (d > 0)
+                    angle = 360 - angle;
 
-                angles.Add(theta);
-
-                sum += 180 - theta;
+                angles.Add(angle);
             }
 
-            // initial rectangular check passed and all angles 90 degrees - the shape is convex
-            if (rectangularInitialCheck && angles.All(x => x == 90))
+            // all angles 90 or 180 degrees - the shape is rectangular
+            if (angles.All(x => Math.Abs(x - 90) < 0.01 || Math.Abs(x - 180) < 0.01))
                 ShapeType = ShapeType.Rectangular;
 
             // all angles divisible by 90 degrees - the shape is axis-aligned
-            else if (angles.All(x => x % 90 == 0))
+            else if (angles.All(x => Math.Round(x) % 90 == 0))
                 ShapeType = ShapeType.AxisAligned;
 
-            // convex shapes always have angles of less than 180 degrees
-            else if (Math.Abs(sum -  360) < 0.5)
+            // all angles at max 180 degrees - the shape is convex
+            else if (angles.All(x => x <= 180))
                 ShapeType = ShapeType.Convex;
 
             // all other shapes are irregular
             else
                 ShapeType = ShapeType.Irregular;
+        }
+
+        /// <summary>
+        /// Helper function for determining the direction of angle between two edges of a polygon
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="x2"></param>
+        /// <param name="y2"></param>
+        /// <param name="x3"></param>
+        /// <param name="y3"></param>
+        /// <returns></returns>
+        public double direction(double x1, double y1, double x2, double y2, double x3, double y3)
+        {
+
+            double d = ((x2 - x1) * (y3 - y1)) - ((y2 - y1) * (x3 - x1));
+
+            return d;
         }
 
         /// <summary>

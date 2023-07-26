@@ -532,6 +532,33 @@ namespace SpaceSubdivisionTestbed
         }
 
         /// <summary>
+        /// Invert polygon edge order from clockwise to counter-clockwise
+        /// Used as helper method if user incorrectly specified the polygon
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            HierarchyElement el = new HierarchyElement();
+            el.Color = shapes[0].Color;
+            el.ID = shapes[0].ID;
+            el.ShapeType = shapes[0].ShapeType;
+
+            for (int i = shapes[0].Edges.Count - 1; i >= 0; i--)
+            {
+                Edge edge = new Edge()
+                {
+                    NodeA = shapes[0].Edges[i].NodeB,
+                    NodeB = shapes[0].Edges[i].NodeA
+                };
+                el.Edges.Add(edge);
+            }
+
+            shapes.Clear();
+            shapes.Add(el);
+        }
+
+        /// <summary>
         /// Determine input element area
         /// </summary>
         /// <param name="sender"></param>

@@ -30,7 +30,7 @@ The user interface of the application is shown below. It consists of four main f
 
 ### 1. Drawing shapes
 
-To initiate drawing, the user first needs to click on the *Start drawing* button. Shapes can be drawn in two ways:
+Drawing shapes is done by adding edges to the panel. All edges must be added in a counter-clockwise order with any starting point. To initiate drawing, the user first needs to click on the *Start drawing* button. Shapes can be drawn in two ways:
 
 1. **Graphical drawing**, which allows the user to draw a shape by using their pointer on the panel. After starting the drawing, the user needs to click on the desired location in order to add a new node described by X and Y coordinates. After adding the initial node, the current pointer location is shown on the left side of the *Graphical drawing* groupbox.
 
