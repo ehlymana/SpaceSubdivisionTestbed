@@ -209,24 +209,24 @@ namespace SpaceSubdivisionTestbed
                 if ((Math.Abs(e2.NodeA.X - e2.NodeB.X) > 0.01 || Math.Abs(e2.NodeA.Y - e2.NodeB.Y) > 0.01) && !e2Exists)
                     Edges.Add(e2);
 
-                // if this is the first intersection point,
-                // wait for the next point for creating the intersection edge
-                if (nodesToAdd.Count == 0)
-                    nodesToAdd.Add(nodeToAdd);
-
-                // add the intersection edge to the list of edges
-                else if (Math.Abs(nodesToAdd[0].X - nodeToAdd.X) > 0.01 || Math.Abs(nodesToAdd[0].Y - nodeToAdd.Y) > 0.01)
-                {
-                    newEdges.Add(new Edge() { NodeA = nodesToAdd[0], NodeB = nodeToAdd });
-                    newEdges.Add(new Edge() { NodeA = nodeToAdd, NodeB = nodesToAdd[0] });
-                    nodesToAdd.Clear();
-                }
-
                 if (newNodes.FindIndex(n => Math.Abs(n.X - nodeToAdd.X) < 0.01 && Math.Abs(n.Y - nodeToAdd.Y) < 0.01) < 0)
                     newNodes.Add(nodeToAdd);
 
                 // remove the first intersection edge from the list of intersections
                 intersectEdges.RemoveAt(0);
+            }
+
+            // sort new nodes by the corresponding coordinate
+            if (performCutHorizontally)
+                newNodes = newNodes.OrderBy(n => n.X).ToList();
+            else
+                newNodes = newNodes.OrderBy(n => n.Y).ToList();
+
+            // add new edges for each cut in the polygon
+            for (int i = 0; i < newNodes.Count; i += 2)
+            {
+                newEdges.Add(new Edge() { NodeA = newNodes[i], NodeB = newNodes[i + 1] });
+                newEdges.Add(new Edge() { NodeA = newNodes[i + 1], NodeB = newNodes[i] });
             }
 
             #endregion
@@ -247,21 +247,22 @@ namespace SpaceSubdivisionTestbed
                     Edge nextEdge;
 
                     if (newNodes.FindIndex(n => Math.Abs(n.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
-                                                Math.Abs(n.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01) < 0 || 
+                                                Math.Abs(n.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01) < 0 ||
                                                 usedNewEdge)
                     {
                         nextEdge = Edges.Find(el => Math.Abs(el.NodeA.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
                                                     Math.Abs(el.NodeA.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01)
                                               ?? new Edge();
                         Edges.Remove(nextEdge);
+                        usedNewEdge = false;
                     }
                     else
                     {
                         nextEdge = newEdges.Find(el => Math.Abs(el.NodeA.X - newElement[newElement.Count - 1].NodeB.X) < 0.01 &&
                                                        Math.Abs(el.NodeA.Y - newElement[newElement.Count - 1].NodeB.Y) < 0.01)
-                                                 ?? new Edge();
-                        usedNewEdge = true;
+                                                ?? new Edge();
                         newEdges.Remove(nextEdge);
+                        usedNewEdge = true;
                     }
 
                     newElement.Add(nextEdge);
@@ -395,7 +396,8 @@ namespace SpaceSubdivisionTestbed
                         if (distanceB < distanceA)
                             closerIntersectPoint = shapeEdge.NodeB;
 
-                        if (edge.NodeA == nonIntersectPoint && edge.NodeB == closerIntersectPoint)
+                        if ((edge.NodeA == nonIntersectPoint && edge.NodeB == closerIntersectPoint) ||
+                            (edge.NodeB == nonIntersectPoint && edge.NodeA == closerIntersectPoint))
                             continue;
 
                         edge.NodeA = nonIntersectPoint;
