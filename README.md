@@ -26,7 +26,7 @@ SpaceSubdivisionTestbed/SpaceSubdivisionTestbed/SpaceSubdivisionTestbed.sln
 
 The user interface of the application is shown below. It consists of four main features which will be explained next.
 
-![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/initial_UI.png?token=GHSAT0AAAAAACAD4E35T4U5HPUC56BGCMKGZF6YUAQ)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/initial_UI.png)
 
 ### 1. Drawing shapes
 
@@ -36,13 +36,13 @@ To initiate drawing, the user first needs to click on the *Start drawing* button
 
 An example of graphical drawing is shown below.
 
-![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/draw.gif?token=GHSAT0AAAAAACAD4E35CTWKEJSUKEQ7QSVEZF6YTGA)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/draw.gif)
 
 2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button.
 
 An example of manual insertion is shown below.
 
-![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/manual.gif?token=GHSAT0AAAAAACAD4E34UXNHCMB4KDPS2YJ4ZF6YUIQ)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/manual.gif)
 
 The process of drawing a shape is finished when the final node is equal to the starting node. In order to achieve this, the user can either graphically or manually specify this node (and create the final edge) and then click on the *Finish drawing* button. Alternatively, the user can click on the *Close loop* button which will automatically add the final edge and finish drawing the shape.
 
@@ -60,7 +60,7 @@ After selecting the desired existing shape and clicking on the *Begin subdivisio
 
 An example of shape subdivision and identification is shown below.
 
-![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/subdivision.gif?token=GHSAT0AAAAAACAD4E35ZIQF4ZIUMTZ3PVTIZF6YU3Q)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/subdivision.gif)
 
 c) Determining shape type
 
@@ -74,7 +74,7 @@ After selecting the desired shape, the user can click on the *Calculate area* bu
 
 An example of shape subdivision and identification is shown below.
 
-![](https://raw.githubusercontent.com/ehlymana/SpaceSubdivisionTestbed/main/README%20figures/shape.gif?token=GHSAT0AAAAAACAD4E35H2FCXCM4BYMJSNDYZF6YUTA)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/shape.gif)
 
 ### 3. Data persistence
 
