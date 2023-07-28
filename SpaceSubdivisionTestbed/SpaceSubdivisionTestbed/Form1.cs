@@ -583,5 +583,86 @@ namespace SpaceSubdivisionTestbed
         }
 
         #endregion
+
+        #region Shape simplification
+
+        /// <summary>
+        /// Performing shape subdivision recursivelyand calculating total leftover element area
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSimplify_Click(object sender, EventArgs e)
+        {
+            // open file path
+            string path = "simplification.txt";
+            StreamWriter sw;
+
+            if (!File.Exists(path))
+                sw = File.CreateText(path);
+            else
+                sw = File.AppendText(path);
+
+            string finalResult = "";
+            double sum = 0.0;
+
+            // initialize list for subdivision and list of subdivided elements
+            List<HierarchyElement> subdividedElements = new List<HierarchyElement>();
+            List<HierarchyElement> leftoverElements = new List<HierarchyElement>();
+            foreach (HierarchyElement element in shapes)
+            {
+                leftoverElements.Add(element);
+                sum += element.DetermineArea();
+            }
+
+            // recursively subdivide elements and calculate leftover area (max. 10 iterations)
+            for (int i = 0; i < 10; i++)
+            {
+                List<HierarchyElement> newElements = new List<HierarchyElement>();
+                double leftoverSum = 0;
+
+                // subdivide elements one by one
+                foreach (HierarchyElement element in leftoverElements)
+                    newElements.AddRange(element.Subdivide());
+                leftoverElements.Clear();
+
+                // determine which elements were simplified
+                foreach (HierarchyElement element in newElements)
+                {
+                    element.DetermineShapeType();
+                    if (element.ShapeType == ShapeType.Rectangular)
+                        subdividedElements.Add(element);
+                    else
+                    {
+                        leftoverSum += element.DetermineArea();
+                        leftoverElements.Add(element);
+                    }
+                }
+
+                finalResult += "Iteration: " + (i + 1) + ", total leftover area: " + Math.Round(leftoverSum / sum * 100, 2) + "%\n";
+
+                // all elements were subdivided and no leftover elements left - end the process
+                if (leftoverElements.Count == 0)
+                    break;
+            }
+
+            // show information about simplification
+            MessageBox.Show(finalResult, "Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            finalResult += "**********************\n\n";
+
+            // show final subdivision
+            shapes.Clear();
+            shapes.AddRange(subdividedElements);
+            shapes.AddRange(leftoverElements);
+            Refresh();
+
+            // write data to file
+            sw.Write(finalResult);
+            sw.Close();
+
+            toolStripStatusLabel1.Text = "Data is written in " + Path.GetFullPath(path);
+        }
+
+        #endregion
     }
 }

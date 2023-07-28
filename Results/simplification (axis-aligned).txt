@@ -1,0 +1,87 @@
+A1
+Iteration: 1, total leftover area: 0%
+**********************
+
+A2
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 0%
+**********************
+
+A3
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 0%
+**********************
+
+A4
+Iteration: 1, total leftover area: 56.45%
+Iteration: 2, total leftover area: 56.45%
+Iteration: 3, total leftover area: 24.19%
+Iteration: 4, total leftover area: 14.11%
+Iteration: 5, total leftover area: 6.05%
+Iteration: 6, total leftover area: 3.02%
+Iteration: 7, total leftover area: 1.64%
+Iteration: 8, total leftover area: 0.63%
+Iteration: 9, total leftover area: 0.35%
+Iteration: 10, total leftover area: 0.18%
+**********************
+
+A5
+Iteration: 1, total leftover area: 53.49%
+Iteration: 2, total leftover area: 16.28%
+Iteration: 3, total leftover area: 11.63%
+Iteration: 4, total leftover area: 6.98%
+Iteration: 5, total leftover area: 0%
+**********************
+
+A6:
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 0%
+**********************
+
+A7:
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 70%
+Iteration: 4, total leftover area: 40%
+Iteration: 5, total leftover area: 17.5%
+Iteration: 6, total leftover area: 6.25%
+Iteration: 7, total leftover area: 4.37%
+Iteration: 8, total leftover area: 2.5%
+Iteration: 9, total leftover area: 1.09%
+Iteration: 10, total leftover area: 0.39%
+**********************
+
+A8:
+Iteration: 1, total leftover area: 39.33%
+Iteration: 2, total leftover area: 39.33%
+Iteration: 3, total leftover area: 22.33%
+Iteration: 4, total leftover area: 14.75%
+Iteration: 5, total leftover area: 6.5%
+Iteration: 6, total leftover area: 3.87%
+Iteration: 7, total leftover area: 2.18%
+Iteration: 8, total leftover area: 1.05%
+Iteration: 9, total leftover area: 0.43%
+Iteration: 10, total leftover area: 0.19%
+**********************
+
+A9:
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 61%
+Iteration: 3, total leftover area: 19%
+Iteration: 4, total leftover area: 12.5%
+Iteration: 5, total leftover area: 0%
+**********************
+
+A10
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 85%
+Iteration: 3, total leftover area: 55%
+Iteration: 4, total leftover area: 28.75%
+Iteration: 5, total leftover area: 13.75%
+Iteration: 6, total leftover area: 5.31%
+Iteration: 7, total leftover area: 2.97%
+Iteration: 8, total leftover area: 1.8%
+Iteration: 9, total leftover area: 0.86%
+Iteration: 10, total leftover area: 0.33%
+**********************
+

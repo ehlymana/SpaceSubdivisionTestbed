@@ -45,6 +45,7 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonDraw = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buttonSimplify = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonArea = new System.Windows.Forms.Button();
             this.buttonShape = new System.Windows.Forms.Button();
@@ -231,6 +232,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonSimplify);
             this.groupBox3.Controls.Add(this.button1);
             this.groupBox3.Controls.Add(this.buttonArea);
             this.groupBox3.Controls.Add(this.buttonShape);
@@ -246,15 +248,24 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Subdivision";
             // 
+            // buttonSimplify
+            // 
+            this.buttonSimplify.Location = new System.Drawing.Point(128, 124);
+            this.buttonSimplify.Name = "buttonSimplify";
+            this.buttonSimplify.Size = new System.Drawing.Size(75, 23);
+            this.buttonSimplify.TabIndex = 10;
+            this.buttonSimplify.Text = "Simplify";
+            this.buttonSimplify.UseVisualStyleBackColor = true;
+            this.buttonSimplify.Click += new System.EventHandler(this.buttonSimplify_Click);
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(78, 115);
+            this.button1.Location = new System.Drawing.Point(16, 124);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 9;
             this.button1.Text = "Invert";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // buttonArea
@@ -413,5 +424,6 @@
         private Button buttonArea;
         private Button buttonShape;
         private Button button1;
+        private Button buttonSimplify;
     }
 }

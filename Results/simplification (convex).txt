@@ -1,0 +1,260 @@
+C1
+Iteration: 1, total leftover area: 42.86%
+Iteration: 2, total leftover area: 14.29%
+Iteration: 3, total leftover area: 14.29%
+Iteration: 4, total leftover area: 7.14%
+Iteration: 5, total leftover area: 5.36%
+Iteration: 6, total leftover area: 3.12%
+Iteration: 7, total leftover area: 2.12%
+Iteration: 8, total leftover area: 1.31%
+Iteration: 9, total leftover area: 0.86%
+Iteration: 10, total leftover area: 0.54%
+**********************
+
+C2
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 47.83%
+Iteration: 3, total leftover area: 21.74%
+Iteration: 4, total leftover area: 8.7%
+Iteration: 5, total leftover area: 8.7%
+Iteration: 6, total leftover area: 5.43%
+Iteration: 7, total leftover area: 2.58%
+Iteration: 8, total leftover area: 1.46%
+Iteration: 9, total leftover area: 1.08%
+Iteration: 10, total leftover area: 0.7%
+**********************
+
+C3
+Iteration: 1, total leftover area: 45.45%
+Iteration: 2, total leftover area: 45.45%
+Iteration: 3, total leftover area: 18.18%
+Iteration: 4, total leftover area: 18.18%
+Iteration: 5, total leftover area: 6.82%
+Iteration: 6, total leftover area: 6.82%
+Iteration: 7, total leftover area: 2.84%
+Iteration: 8, total leftover area: 2.84%
+Iteration: 9, total leftover area: 1.31%
+Iteration: 10, total leftover area: 1.25%
+**********************
+
+C4
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 100%
+Iteration: 4, total leftover area: 100%
+Iteration: 5, total leftover area: 59.37%
+Iteration: 6, total leftover area: 49.22%
+Iteration: 7, total leftover area: 29.49%
+Iteration: 8, total leftover area: 23.1%
+Iteration: 9, total leftover area: 14.37%
+Iteration: 10, total leftover area: 10.77%
+**********************
+
+C5
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 100%
+Iteration: 4, total leftover area: 50%
+Iteration: 5, total leftover area: 37.5%
+Iteration: 6, total leftover area: 21.87%
+Iteration: 7, total leftover area: 14.84%
+Iteration: 8, total leftover area: 9.18%
+Iteration: 9, total leftover area: 6.01%
+Iteration: 10, total leftover area: 3.8%
+**********************
+
+C6
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 33.33%
+Iteration: 3, total leftover area: 33.33%
+Iteration: 4, total leftover area: 16.67%
+Iteration: 5, total leftover area: 16.67%
+Iteration: 6, total leftover area: 8.85%
+Iteration: 7, total leftover area: 7.94%
+Iteration: 8, total leftover area: 4.46%
+Iteration: 9, total leftover area: 3.62%
+Iteration: 10, total leftover area: 2.17%
+**********************
+
+C7
+Iteration: 1, total leftover area: 42.86%
+Iteration: 2, total leftover area: 14.29%
+Iteration: 3, total leftover area: 14.29%
+Iteration: 4, total leftover area: 7.14%
+Iteration: 5, total leftover area: 7.14%
+Iteration: 6, total leftover area: 3.79%
+Iteration: 7, total leftover area: 3.4%
+Iteration: 8, total leftover area: 1.91%
+Iteration: 9, total leftover area: 1.55%
+Iteration: 10, total leftover area: 0.93%
+**********************
+
+C8
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 33.33%
+Iteration: 3, total leftover area: 33.33%
+Iteration: 4, total leftover area: 16.67%
+Iteration: 5, total leftover area: 16.67%
+Iteration: 6, total leftover area: 8.85%
+Iteration: 7, total leftover area: 7.94%
+Iteration: 8, total leftover area: 4.46%
+Iteration: 9, total leftover area: 3.62%
+Iteration: 10, total leftover area: 2.17%
+**********************
+
+C9
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 100%
+Iteration: 4, total leftover area: 78.12%
+Iteration: 5, total leftover area: 65.62%
+Iteration: 6, total leftover area: 42.77%
+Iteration: 7, total leftover area: 31.15%
+Iteration: 8, total leftover area: 20.23%
+Iteration: 9, total leftover area: 13.57%
+Iteration: 10, total leftover area: 8.73%
+**********************
+
+C10
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 60%
+Iteration: 4, total leftover area: 33.33%
+Iteration: 5, total leftover area: 19.44%
+Iteration: 6, total leftover area: 13.47%
+Iteration: 7, total leftover area: 8.51%
+Iteration: 8, total leftover area: 5.43%
+Iteration: 9, total leftover area: 3.59%
+Iteration: 10, total leftover area: 2.2%
+**********************
+
+C11
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 62.5%
+Iteration: 3, total leftover area: 43.75%
+Iteration: 4, total leftover area: 29.69%
+Iteration: 5, total leftover area: 18.36%
+Iteration: 6, total leftover area: 13.38%
+Iteration: 7, total leftover area: 7.93%
+Iteration: 8, total leftover area: 5.82%
+Iteration: 9, total leftover area: 3.52%
+Iteration: 10, total leftover area: 2.49%
+**********************
+
+C12
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 50%
+Iteration: 3, total leftover area: 37.5%
+Iteration: 4, total leftover area: 21.87%
+Iteration: 5, total leftover area: 14.84%
+Iteration: 6, total leftover area: 9.18%
+Iteration: 7, total leftover area: 6.01%
+Iteration: 8, total leftover area: 3.8%
+Iteration: 9, total leftover area: 2.45%
+Iteration: 10, total leftover area: 1.56%
+**********************
+
+C13
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 57.95%
+Iteration: 4, total leftover area: 53.69%
+Iteration: 5, total leftover area: 28.99%
+Iteration: 6, total leftover area: 21.45%
+Iteration: 7, total leftover area: 12.63%
+Iteration: 8, total leftover area: 8.64%
+Iteration: 9, total leftover area: 5.68%
+Iteration: 10, total leftover area: 3.91%
+**********************
+
+C14
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 100%
+Iteration: 4, total leftover area: 51.18%
+Iteration: 5, total leftover area: 45.61%
+Iteration: 6, total leftover area: 24.84%
+Iteration: 7, total leftover area: 20.24%
+Iteration: 8, total leftover area: 11.37%
+Iteration: 9, total leftover area: 8.82%
+Iteration: 10, total leftover area: 5.25%
+**********************
+
+C15
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 46.65%
+Iteration: 4, total leftover area: 37.61%
+Iteration: 5, total leftover area: 22.01%
+Iteration: 6, total leftover area: 15.56%
+Iteration: 7, total leftover area: 10.01%
+Iteration: 8, total leftover area: 6.74%
+Iteration: 9, total leftover area: 4.27%
+Iteration: 10, total leftover area: 2.79%
+**********************
+
+C16
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 66.64%
+Iteration: 3, total leftover area: 49.95%
+Iteration: 4, total leftover area: 33.5%
+Iteration: 5, total leftover area: 24.6%
+Iteration: 6, total leftover area: 15.17%
+Iteration: 7, total leftover area: 9.6%
+Iteration: 8, total leftover area: 6.26%
+Iteration: 9, total leftover area: 4.14%
+Iteration: 10, total leftover area: 2.5%
+**********************
+
+C17
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 72.3%
+Iteration: 4, total leftover area: 31.46%
+Iteration: 5, total leftover area: 31.46%
+Iteration: 6, total leftover area: 16.9%
+Iteration: 7, total leftover area: 15.08%
+Iteration: 8, total leftover area: 8.37%
+Iteration: 9, total leftover area: 6.89%
+Iteration: 10, total leftover area: 3.57%
+**********************
+
+C18
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 41.67%
+Iteration: 4, total leftover area: 41.67%
+Iteration: 5, total leftover area: 20.83%
+Iteration: 6, total leftover area: 17.19%
+Iteration: 7, total leftover area: 10.42%
+Iteration: 8, total leftover area: 7.29%
+Iteration: 9, total leftover area: 4.98%
+Iteration: 10, total leftover area: 3.22%
+**********************
+
+C19
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 51.56%
+Iteration: 4, total leftover area: 39.04%
+Iteration: 5, total leftover area: 23.59%
+Iteration: 6, total leftover area: 16.39%
+Iteration: 7, total leftover area: 10.76%
+Iteration: 8, total leftover area: 6.87%
+Iteration: 9, total leftover area: 4.69%
+Iteration: 10, total leftover area: 2.88%
+**********************
+
+C20
+Iteration: 1, total leftover area: 100%
+Iteration: 2, total leftover area: 100%
+Iteration: 3, total leftover area: 75.78%
+Iteration: 4, total leftover area: 47.08%
+Iteration: 5, total leftover area: 32.91%
+Iteration: 6, total leftover area: 21.54%
+Iteration: 7, total leftover area: 14.85%
+Iteration: 8, total leftover area: 9.49%
+Iteration: 9, total leftover area: 6.57%
+Iteration: 10, total leftover area: 3.93%
+**********************
+
