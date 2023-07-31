@@ -36,15 +36,11 @@ Drawing polygons is done by adding polygon edges to the panel. All edges must be
 
 To initiate drawing, the user first needs to click on the *Start drawing* button. Polygons can be drawn on the panel in two ways:
 
-1. **Graphical drawing**, which allows the user to draw a polygon by using their pointer on the panel. After starting the drawing, the user needs to click on the desired location in order to add a new node described by X and Y coordinates. After adding the initial node, the current pointer location is shown on the left side of the *Graphical drawing* groupbox (X and Y coordinates).
-
-An example of graphical drawing is shown below.
+1. **Graphical drawing**, which allows the user to draw a polygon by using their pointer on the panel. After starting the drawing, the user needs to click on the desired location in order to add a new node described by X and Y coordinates. After adding the initial node, the current pointer location is shown on the left side of the *Graphical drawing* groupbox (X and Y coordinates). An example of graphical drawing is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/drawpolygon.gif)
 
-2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button.
-
-An example of manual insertion is shown below.
+2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button. An example of manual insertion is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/manualdraw.gif)
 
@@ -60,9 +56,7 @@ In order to identify a polygon, the *Identify element* button from the *Subdivis
 
 b) **Polygon subdivision**
 
-After selecting the desired existing polygon and clicking on the *Begin subdivision* button from the *Subdivision* groupbox, polygon subdivision will be performed. The subdivision works on arbitrary shape types and always subdivides the polygon in half, by using the longer dimension (X or Y).
-
-An example of polygon subdivision and identification is shown below.
+After selecting the desired existing polygon and clicking on the *Begin subdivision* button from the *Subdivision* groupbox, polygon subdivision will be performed. The subdivision works on arbitrary shape types and always subdivides the polygon in half, by using the longer dimension (X or Y). An example of polygon subdivision and identification is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/polygonsubdivision.gif)
 
@@ -74,17 +68,13 @@ Each polygon belongs to one of four shape categories: rectangular, axis-aligned,
 
 d) **Polygon area calculation**
 
-After selecting the desired polygon, the user can click on the *Calculate area* button from the *Subdivision* groupbox. This will calculate the area which the polygon occupies, expressed in pixels (e.g. if a rectangle is 100 by 100 pixels long, it occupies an area of 1,000 pixels).
-
-An example of area calculation is shown below.
+After selecting the desired polygon, the user can click on the *Calculate area* button from the *Subdivision* groupbox. This will calculate the area which the polygon occupies, expressed in pixels (e.g. if a rectangle is 100 by 100 pixels long, it occupies an area of 1,000 pixels). An example of area calculation is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/area.gif)
 
 e) **Polygon simplification**
 
-Iterative subdivision can be performed on a single polygon. The subdivision stops either when all subdivided polygons are of rectangular shape, or after the 10th iteration is finished. To perform polygon simplification, the user needs to click on the *Simplify* button from the *Subdivision* groupbox. Iterative subdivision will be performed on the desired polygon and information about the overall area of leftover convex elements will be shown in a message box.
-
-An example of polygon simplification is shown below.
+Iterative subdivision can be performed on a single polygon. The subdivision stops either when all subdivided polygons are of rectangular shape, or after the 10th iteration is finished. To perform polygon simplification, the user needs to click on the *Simplify* button from the *Subdivision* groupbox. Iterative subdivision will be performed on the desired polygon and information about the overall area of leftover convex elements will be shown in a message box. An example of polygon simplification is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/simplification.gif)
 
