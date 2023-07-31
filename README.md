@@ -28,7 +28,7 @@ SpaceSubdivisionTestbed/SpaceSubdivisionTestbed/SpaceSubdivisionTestbed.sln
 
 The user interface of the application is shown below. It consists of four main features which will be explained next.
 
-![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/initial_UI.png)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/initialUI.png)
 
 ### 1. Drawing shapes
 
