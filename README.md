@@ -30,23 +30,23 @@ The user interface of the application is shown below. It consists of four main f
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/initialUI.png)
 
-### 1. Drawing shapes
+### 1. Drawing polygons
 
-Drawing shapes is done by adding polygon edges to the panel. All edges must be added in a counter-clockwise order with any starting point. If the user reverses the order, they can always use the *Invert* button from the *Subdivision* groupbox to reverse the order a second time.
+Drawing polygons is done by adding polygon edges to the panel. All edges must be added in a counter-clockwise order with any starting point. If the user reverses the order, they can always use the *Invert* button from the *Subdivision* groupbox to reverse the order a second time.
 
-To initiate drawing, the user first needs to click on the *Start drawing* button. Shapes can be drawn on the panel in two ways:
+To initiate drawing, the user first needs to click on the *Start drawing* button. Polygons can be drawn on the panel in two ways:
 
 1. **Graphical drawing**, which allows the user to draw a polygon by using their pointer on the panel. After starting the drawing, the user needs to click on the desired location in order to add a new node described by X and Y coordinates. After adding the initial node, the current pointer location is shown on the left side of the *Graphical drawing* groupbox (X and Y coordinates).
 
 An example of graphical drawing is shown below.
 
-![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/draw.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/drawpolygon.gif)
 
 2. **Manual insertion**, which allows the user to manually specify the X and Y coordinates of all nodes by using the *Manual insertion* groupbox and the *Insert* button.
 
 An example of manual insertion is shown below.
 
-![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/manual.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/manualdraw.gif)
 
 The process of drawing a polygon is finished when the final node is equal to the starting node. In order to achieve this, the user can either graphically or manually specify this node (and create the final edge) and then click on the *Finish drawing* button. Alternatively, the user can click on the *Close loop* button which will automatically add the final edge and finish drawing the polygon.
 
@@ -64,7 +64,7 @@ After selecting the desired existing polygon and clicking on the *Begin subdivis
 
 An example of polygon subdivision and identification is shown below.
 
-![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/subdivision.gif)
+![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/polygonsubdivision.gif)
 
 c) **Determining shape type**
 
@@ -90,18 +90,18 @@ An example of polygon simplification is shown below.
 
 ### 3. Data persistence
 
-The *Import/export data* button is located at the top right corner of the tool. All shapes which were drawn and/or subdivided can be exported and then imported for later usage in the tool. The data is saved in JSON format, and many examples of all shape types are located in the following directory:
+The *Import/export data* button is located at the top right corner of the tool. All polygons which were drawn and/or subdivided can be exported and then imported for later usage in the tool. The data is saved in JSON format, and many examples of all shape types are located in the following directory:
 
 ```
 SpaceSubdivisionTestbed/Examples
 ```
 
-The JSON format can also be used for programmatically adding new shapes without having to draw them manually. An example of importing and exporting data is shown below.
+The JSON format can also be used for programmatically adding new polygons without having to draw them manually. An example of importing and exporting data is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/importexport.gif)
 
 ### 4. Reset
 
-The user can click on the *Reset* button, located at the right bottom corner of the panel, at any time to delete all existing shapes from the panel and start the process of drawing and subdivision over again. An example of this feature is shown below.
+The user can click on the *Reset* button, located at the right bottom corner of the panel, at any time to delete all existing polygons from the panel and start the process of drawing and subdivision over again. An example of this feature is shown below.
 
 ![](https://github.com/ehlymana/SpaceSubdivisionTestbed/blob/main/README%20figures/reset.gif)
