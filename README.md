@@ -4,7 +4,9 @@
 
 If you use this application, please cite the following work:
 
-> TBA
+```
+Emir Cogo and Ehlimana and Selma Rizvić, 2023. "SpaceSubdivisionTestbed: A graphical tool for arbitrary shaped 2D polygon subdivision", submitted to The 7th International Conference on Computer Science and Application Engineering (CSAE 2023), Wuhan.
+```
 
 ## Usage
 
