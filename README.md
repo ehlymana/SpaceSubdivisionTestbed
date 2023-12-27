@@ -5,7 +5,7 @@
 If you use this application, please cite the following work:
 
 ```
-Emir Cogo and Ehlimana Krupalija and Selma Rizvić, 2023. "SpaceSubdivisionTestbed: A graphical tool for arbitrary shaped 2D polygon subdivision", submitted to The 7th International Conference on Computer Science and Application Engineering (CSAE 2023), Wuhan.
+Emir Cogo and Ehlimana Krupalija and Selma Rizvić, 2023. "SpaceSubdivisionTestbed: A graphical tool for arbitrary shaped 2D polygon subdivision", CSAE '23: Proceedings of the 7th International Conference on Computer Science and Application Engineering, Virtual event, China, pp. 1-5, DOI: 10.1145/3627915.3629605.
 ```
 
 ## Usage
